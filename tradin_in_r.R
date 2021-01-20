@@ -121,5 +121,13 @@ for (ticker in tickers){
 portfolioPrices <- as.data.frame(portfolioPrices)
 portfolioPrices <- rownames_to_column(portfolioPrices, var = "Date")
 df_for_plot <- portfolioPrices %>%
-  gather(key = "variable", value = "value", -Date)
+  gather(key = "Ticket", value = "Price", -Date)
+
+#plot the graphic
+ggplot(df_for_plot, aes(x = Date, y = Price))+
+  geom_line(aes(group = Ticket, linetype = Ticket))+
+  theme(panel.background =  element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())+
+  labs(title = "Price adjusted change from December 2020")
 
