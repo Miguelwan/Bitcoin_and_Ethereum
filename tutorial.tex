@@ -1,0 +1,58 @@
+\documentclass[letterpaper]{article}
+%\usepackage[spanish]{babel}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+%\documentclass[10pt]{article}
+%\usepackage[spanish]{babel}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{amsthm}
+\usepackage[latin1]{inputenc}
+\usepackage{mathtools}
+\newtheorem{definicion}{Definition}[section]
+\newtheorem{teorema}[definicion]{Theorem}
+\newtheorem{lema}[definicion]{Lemma}
+\newtheorem{claim}[definicion]{Claim}
+\newtheorem{ejemplo}{Example}[section]
+\newtheorem{ejercicio}{Exercise}[section]
+\newtheorem{fact}[definicion]{Fact}
+\newtheorem{Prop}[definicion]{Proposition}
+\newtheorem{corolario}[definicion]{Corollary}
+\newtheorem{pregunta}[definicion]{Question}
+\renewcommand{\o}{\omega}
+\renewcommand{\k}{\kappa}
+\newcommand{\qo}{\sqsubseteq}
+\renewcommand{\a}{\alpha}
+\newcommand{\ZF}{\operatorname{ZF}}
+\renewcommand{\k}{\kappa}
+\newcommand{\Sk}{\operatorname{Sk}}
+
+
+
+%\usepackage[utf8]{inputenc}
+\title{Tutorial: R for trading information from Yahoo}
+\author{Miguel Moreno}
+\date{}
+\begin{document}
+\maketitle
+\section{Ste up}
+\begin{itemize}
+\item Download R from \textit{cran.r-project.org} and follow the installation instructions.
+\item Download Rstudio from \textit{rstudio} and follow the installation instructions.
+\item Open Rstudio and create a new document. install the packages \textit{quantmod} and \textit{PerformanceAnalytics} by writing and running the lines:
+\begin{itemize}
+\item install.packages("quantmod")
+\item install.packages("PerformanceAnalytics")
+\end{itemize}
+If you obtain the error \textit{´´Warning in install.packages :
+package ------- is not available.."}, then go to \textbf{Tools}$\rightarrow$\textbf{Install Packages} and search for the packages, select it and install it.  
+\end{itemize}
+\end{document}
