@@ -5,7 +5,8 @@ library(PerformanceAnalytics)
 library(dplyr)
 library(caret)
 library(tidyverse)
-
+library(ggplot2)
+library(tibble)
 
 #choose the date to start collecting the data
 date <- "2020-1-1"
@@ -120,6 +121,5 @@ for (ticker in tickers){
 portfolioPrices <- as.data.frame(portfolioPrices)
 portfolioPrices <- rownames_to_column(portfolioPrices, var = "Date")
 df_for_plot <- portfolioPrices %>%
-  select(Date, LTC.USD.Adjusted, ETH.USD.Adjusted, XRP.USD.Adjusted, BTC.USD.Adjusted) %>%
   gather(key = "variable", value = "value", -Date)
 
