@@ -62,24 +62,24 @@ chartSeries(BTCRets)
 dfLTC <- data.frame(LTCUSD)
 LTCwith_ticket <- mutate(dfLTC, Company_Ticket = "LTC-USD", Date = row.names(dfLTC))
 row.names(LTCwith_ticket) <- 1:nrow(LTCUSD)
-colnames(LTCwith_ticket) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted", "Company_Ticket", "Date")
+colnames(LTCwith_ticket) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted", "Ticket", "Date")
 
 dfETH <- data.frame(ETHUSD)
 ETHwith_ticket <- mutate(dfETH, Company_Ticket="ETH-USD", Date = row.names(dfETH))
 row.names(ETHwith_ticket) <- 1:nrow(ETHUSD)
-colnames(ETHwith_ticket) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted", "Company_Ticket", "Date")
+colnames(ETHwith_ticket) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted", "Ticket", "Date")
 
 dfXRP <- data.frame(XRPUSD)
 XRPwith_ticket <- mutate(dfXRP, Company_Ticket="XRP-USD", Date = row.names(dfXRP))
 row.names(XRPwith_ticket) <- 1:nrow(XRPUSD)
-colnames(XRPwith_ticket) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted", "Company_Ticket", "Date")
+colnames(XRPwith_ticket) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted", "Ticket", "Date")
 
 dfBTC <- data.frame(BTCUSD)
 BTCwith_ticket <- mutate(dfBTC, Company_Ticket="BTC-USD", Date = row.names(dfBTC))
 row.names(BTCwith_ticket) <- 1:nrow(BTCUSD)
-colnames(BTCwith_ticket) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted", "Company_Ticket", "Date")
+colnames(BTCwith_ticket) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted", "Ticket", "Date")
 
-
-#bigdat <- rbind(dfLTC, dfETH)
+Cripto_index <- rbind(LTCwith_ticket, ETHwith_ticket, XRPwith_ticket, BTCwith_ticket)
+Cripto_index_ordered <- Cripto_index[, c(7, 8, 1, 2, 3, 4, 5, 6)]
 
 
