@@ -82,4 +82,44 @@ colnames(BTCwith_ticket) <- c("Open", "High", "Low", "Close", "Volume", "Adjuste
 Cripto_index <- rbind(LTCwith_ticket, ETHwith_ticket, XRPwith_ticket, BTCwith_ticket)
 Cripto_index_ordered <- Cripto_index[, c(7, 8, 1, 2, 3, 4, 5, 6)]
 
+#overview
+str(Cripto_index_ordered)
+summary(Cripto_index_ordered)
+sd(Cripto_index_ordered$Adjusted)
+
+meanLTC <- mean(LTCwith_ticket$Adjusted)
+meanETH <- mean(ETHwith_ticket$Adjusted)
+meanXRP <- mean(XRPwith_ticket$Adjusted)
+meanBTC <- mean(BTCwith_ticket$Adjusted)
+
+sdLTC <- sd(LTCwith_ticket$Adjusted)
+sdETH <- sd(ETHwith_ticket$Adjusted)
+sdXRP <- sd(XRPwith_ticket$Adjusted)
+sdBTC <- sd(BTCwith_ticket$Adjusted)
+
+CoefLTC <- (sdLTC/meanLTC)*100
+CoefETH <- (sdETH/meanLTC)*100
+CoefXRP <- (sdXRP/meanLTC)*100
+CoefBTC <- (sdBTC/meanLTC)*100
+
+#Get the recent prices
+date2 <- "2020-12-1"
+tickers <- c("LTC-USD", "ETH-USD", "XRP-USD", "BTC-USD")
+
+portfolioPrices <- NULL
+for (ticker in tickers){
+  portfolioPrices <- cbind(portfolioPrices, 
+                           LTCUSD <- getSymbols.yahoo(ticker,
+                                                      from = date2,
+                                                      periodicity = "daily",
+                                                      auto.assign = F)[,6])
+  
+}
+
+#prepare the dataframe to plot
+portfolioPrices <- as.data.frame(portfolioPrices)
+portfolioPrices <- rownames_to_column(portfolioPrices, var = "Date")
+df_for_plot <- portfolioPrices %>%
+  select(Date, LTC.USD.Adjusted, ETH.USD.Adjusted, XRP.USD.Adjusted, BTC.USD.Adjusted) %>%
+  gather(key = "variable", value = "value", -Date)
 
