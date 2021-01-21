@@ -131,3 +131,27 @@ ggplot(df_for_plot, aes(x = Date, y = Price))+
         panel.grid.minor = element_blank())+
   labs(title = "Price adjusted change from December 2020")
 
+
+#Japanese candlesticks in two months
+#Litecoin
+getSymbols(Symbols = "LTC-USD", src = "yahoo", from = "2020-11-01", to = "2020-12-31")
+chartSeries(`LTC-USD`)
+
+#Ethereum
+getSymbols(Symbols = "ETH-USD", src = "yahoo", from = "2020-11-01", to = "2020-12-31")
+chartSeries(`ETH-USD`)
+
+#Ripple
+getSymbols(Symbols = "XRP-USD", src = "yahoo", from = "2020-11-01", to = "2020-12-31")
+chartSeries(`XRP-USD`)
+
+#Bitcoin
+getSymbols(Symbols = "BTC-USD", src = "yahoo", from = "2020-11-01", to = "2020-12-31")
+chartSeries(`BTC-USD`)
+
+
+#Histograms
+hist(LTCUSD$`LTC-USD.Adjusted`, breaks = 60, col = "blue")
+hist(ETHUSD$`ETH-USD.Adjusted`, breaks = 60, col = "blue")
+hist(XRPUSD$`XRP-USD.Adjusted`, breaks = 60, col = "blue")
+hist(BTCUSD$`BTC-USD.Adjusted`, breaks = 60, col = "blue")
