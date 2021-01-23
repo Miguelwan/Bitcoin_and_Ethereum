@@ -110,7 +110,7 @@ tickers <- c("LTC-USD", "ETH-USD", "XRP-USD", "BTC-USD")
 portfolioPrices <- NULL
 for (ticker in tickers){
   portfolioPrices <- cbind(portfolioPrices, 
-                           LTCUSD <- getSymbols.yahoo(ticker,
+                           getSymbols.yahoo(ticker,
                                                       from = date2,
                                                       periodicity = "daily",
                                                       auto.assign = F)[,6])
