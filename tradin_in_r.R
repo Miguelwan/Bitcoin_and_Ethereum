@@ -155,3 +155,7 @@ hist(LTCUSD$`LTC-USD.Adjusted`, breaks = 60, col = "blue")
 hist(ETHUSD$`ETH-USD.Adjusted`, breaks = 60, col = "blue")
 hist(XRPUSD$`XRP-USD.Adjusted`, breaks = 60, col = "blue")
 hist(BTCUSD$`BTC-USD.Adjusted`, breaks = 60, col = "blue")
+
+
+#Bollinger
+`LTCUSD` %>% chartSeries(TA = "addBBands();addVo();addMACD()",subset = 2020)
