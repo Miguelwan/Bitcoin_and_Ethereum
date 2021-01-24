@@ -157,9 +157,15 @@ hist(XRPUSD$`XRP-USD.Adjusted`, breaks = 60, col = "blue")
 hist(BTCUSD$`BTC-USD.Adjusted`, breaks = 60, col = "blue")
 
 
-#Bollinger bands
-`LTCUSD` %>% chartSeries(TA = "addBBands();addVo();addMACD()",subset = 2020)
-`ETHUSD` %>% chartSeries(TA = "addBBands();addVo();addMACD()",subset = 2020)
-`XRPUSD` %>% chartSeries(TA = "addBBands();addVo();addMACD()",subset = 2020)
-`BTCUSD` %>% chartSeries(TA = "addBBands();addVo();addMACD()",subset = 2020)
+#Bollinger bands 2020
+`LTCUSD` %>% chartSeries(TA = "addBBands();addVo();addMACD()",subset = '2020')
+`ETHUSD` %>% chartSeries(TA = "addBBands();addVo();addMACD()",subset = '2020')
+`XRPUSD` %>% chartSeries(TA = "addBBands();addVo();addMACD()",subset = '2020')
+`BTCUSD` %>% chartSeries(TA = "addBBands();addVo();addMACD()",subset = '2020')
+
+#Bollinger bands with RSI  and ATR 2020
+`LTCUSD` %>% chartSeries(TA = "addBBands(); addMACD(); addRSI(); addATR()",subset = '2020')
+`ETHUSD` %>% chartSeries(TA = "addBBands(); addMACD(); addRSI(); addATR()",subset = '2020')
+`XRPUSD` %>% chartSeries(TA = "addBBands(); addMACD(); addRSI(); addATR()",subset = '2020')
+`BTCUSD` %>% chartSeries(TA = "addBBands(); addMACD(); addRSI(); addATR()",subset = '2020')
 
