@@ -170,9 +170,26 @@ hist(BTCUSD$`BTC-USD.Adjusted`, breaks = 60, col = "blue")
 `BTCUSD` %>% chartSeries(TA = "addBBands(); addMACD(); addRSI(); addATR()")
 
 
-LTCUSDROcC <- ROC(portfolioPrices[,1], type = 'continuous')
-portfolioPrices[,1] %>% chartSeries(TA = "addROC(type = 'continuous')")
+#ROC of each coin and portfolio (discrete)
+LTCUSDROC <- ROC(portfolioPrices[,1], type = 'discrete')
+ETHUSDROC <- ROC(portfolioPrices[,2], type = 'discrete')
+XRPUSDROC <- ROC(portfolioPrices[,3], type = 'discrete')
+BTCUSDROC <- ROC(portfolioPrices[,4], type = 'discrete')
+portfolioDROC <- ROC(portfolioPrices, type = 'discrete')
 
-
-
+#ROC graph of each coin and portfolio (discrete)
+portfolioPrices[,1] %>% chartSeries(TA = "addROC(type = 'discrete')", 
+                                    subset = 2020-12) #Litecoin
+portfolioPrices[,2] %>% chartSeries(TA = "addROC(type = 'discrete')", 
+                                    subset = 2020-12) #Ethereum
+portfolioPrices[,3] %>% chartSeries(TA = "addROC(type = 'discrete')", 
+                                    subset = 2020-12) #Ripple
+portfolioPrices[,4] %>% chartSeries(TA = "addROC(type = 'discrete')", 
+                                    subset = 2020-12) #Bitcoin
+portfolioPrices %>% chartSeries(TA = "addROC(type = 'discrete')", 
+                                subset = 2020-12) 
+#ROC the portfolio (continuous)
+portfolioCROC <- ROC(portfolioPrices, type = 'continuous')
+portfolioPrices %>% chartSeries(TA = "addROC(type = 'continuous')", 
+                                    subset = 2020-12) 
 
