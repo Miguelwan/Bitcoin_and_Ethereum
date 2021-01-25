@@ -193,3 +193,7 @@ portfolioCROC <- ROC(portfolioPrices, type = 'continuous')
 portfolioPrices %>% chartSeries(TA = "addROC(type = 'continuous')", 
                                     subset = 2020-12) 
 
+#Returns of the portfolio
+stockReturns <- Return.calculate(portfolioPrices)
+portfolioReturns <- Return.portfolio(stockReturns)
+
