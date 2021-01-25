@@ -121,7 +121,7 @@ for (ticker in tickers){
 portfolioPrices <- as.data.frame(portfolioPrices)
 portfolioPrices <- rownames_to_column(portfolioPrices, var = "Date")
 df_for_plot <- portfolioPrices %>%
-  gather(key = "Ticket", value = "Price", -Date)
+  gather(key = "Ticker", value = "Price", -Date)
 
 #plot the graphic
 ggplot(df_for_plot, aes(x = Date, y = Price))+
@@ -158,14 +158,20 @@ hist(BTCUSD$`BTC-USD.Adjusted`, breaks = 60, col = "blue")
 
 
 #Bollinger bands 2020
-`LTCUSD` %>% chartSeries(TA = "addBBands();addVo();addMACD()",subset = '2020')
-`ETHUSD` %>% chartSeries(TA = "addBBands();addVo();addMACD()",subset = '2020')
-`XRPUSD` %>% chartSeries(TA = "addBBands();addVo();addMACD()",subset = '2020')
-`BTCUSD` %>% chartSeries(TA = "addBBands();addVo();addMACD()",subset = '2020')
+`LTCUSD` %>% chartSeries(TA = "addBBands();addVo();addMACD()")
+`ETHUSD` %>% chartSeries(TA = "addBBands();addVo();addMACD()")
+`XRPUSD` %>% chartSeries(TA = "addBBands();addVo();addMACD()")
+`BTCUSD` %>% chartSeries(TA = "addBBands();addVo();addMACD()")
 
 #Bollinger bands with RSI  and ATR 2020
-`LTCUSD` %>% chartSeries(TA = "addBBands(); addMACD(); addRSI(); addATR()",subset = '2020')
-`ETHUSD` %>% chartSeries(TA = "addBBands(); addMACD(); addRSI(); addATR()",subset = '2020')
-`XRPUSD` %>% chartSeries(TA = "addBBands(); addMACD(); addRSI(); addATR()",subset = '2020')
-`BTCUSD` %>% chartSeries(TA = "addBBands(); addMACD(); addRSI(); addATR()",subset = '2020')
+`LTCUSD` %>% chartSeries(TA = "addBBands(); addMACD(); addRSI(); addATR()")
+`ETHUSD` %>% chartSeries(TA = "addBBands(); addMACD(); addRSI(); addATR()")
+`XRPUSD` %>% chartSeries(TA = "addBBands(); addMACD(); addRSI(); addATR()")
+`BTCUSD` %>% chartSeries(TA = "addBBands(); addMACD(); addRSI(); addATR()")
+
+
+
+
+
+
 
