@@ -170,7 +170,8 @@ hist(BTCUSD$`BTC-USD.Adjusted`, breaks = 60, col = "blue")
 `BTCUSD` %>% chartSeries(TA = "addBBands(); addMACD(); addRSI(); addATR()")
 
 
-
+LTCUSDROcC <- ROC(portfolioPrices[,1], type = 'continuous')
+portfolioPrices[,1] %>% chartSeries(TA = "addROC(type = 'continuous')")
 
 
 
