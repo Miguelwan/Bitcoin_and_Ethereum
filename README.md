@@ -5,4 +5,4 @@ Files:
 
 trading_in_r.R (code)
 
-tutorial.tex (code of PDF to explain the cde in trading_in_r)
+tutorial.tex (code of PDF to explain the code in trading_in_r)
