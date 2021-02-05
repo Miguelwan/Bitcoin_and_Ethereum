@@ -61,26 +61,26 @@ chartSeries(BTCRets)
 
 #Prepare the data frames
 dfLTC <- data.frame(LTCUSD)
-LTCwith_ticket <- mutate(dfLTC, Company_Ticket = "LTC-USD", Date = row.names(dfLTC))
-row.names(LTCwith_ticket) <- 1:nrow(LTCUSD)
-colnames(LTCwith_ticket) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted", "Ticket", "Date")
+LTCwith_ticker <- mutate(dfLTC, Company_Ticker = "LTC-USD", Date = row.names(dfLTC))
+row.names(LTCwith_ticker) <- 1:nrow(LTCUSD)
+colnames(LTCwith_ticker) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted", "Ticker", "Date")
 
 dfETH <- data.frame(ETHUSD)
-ETHwith_ticket <- mutate(dfETH, Company_Ticket="ETH-USD", Date = row.names(dfETH))
-row.names(ETHwith_ticket) <- 1:nrow(ETHUSD)
-colnames(ETHwith_ticket) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted", "Ticket", "Date")
+ETHwith_ticker <- mutate(dfETH, Company_Ticker="ETH-USD", Date = row.names(dfETH))
+row.names(ETHwith_ticker) <- 1:nrow(ETHUSD)
+colnames(ETHwith_ticker) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted", "Ticker", "Date")
 
 dfXRP <- data.frame(XRPUSD)
-XRPwith_ticket <- mutate(dfXRP, Company_Ticket="XRP-USD", Date = row.names(dfXRP))
-row.names(XRPwith_ticket) <- 1:nrow(XRPUSD)
-colnames(XRPwith_ticket) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted", "Ticket", "Date")
+XRPwith_ticker <- mutate(dfXRP, Company_Ticker="XRP-USD", Date = row.names(dfXRP))
+row.names(XRPwith_ticker) <- 1:nrow(XRPUSD)
+colnames(XRPwith_ticker) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted", "Ticker", "Date")
 
 dfBTC <- data.frame(BTCUSD)
-BTCwith_ticket <- mutate(dfBTC, Company_Ticket="BTC-USD", Date = row.names(dfBTC))
-row.names(BTCwith_ticket) <- 1:nrow(BTCUSD)
-colnames(BTCwith_ticket) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted", "Ticket", "Date")
+BTCwith_ticker <- mutate(dfBTC, Company_Ticker="BTC-USD", Date = row.names(dfBTC))
+row.names(BTCwith_ticker) <- 1:nrow(BTCUSD)
+colnames(BTCwith_ticker) <- c("Open", "High", "Low", "Close", "Volume", "Adjusted", "Ticker", "Date")
 
-Cripto_index <- rbind(LTCwith_ticket, ETHwith_ticket, XRPwith_ticket, BTCwith_ticket)
+Cripto_index <- rbind(LTCwith_ticker, ETHwith_ticker, XRPwith_ticker, BTCwith_ticker)
 Cripto_index_ordered <- Cripto_index[, c(7, 8, 1, 2, 3, 4, 5, 6)]
 
 #overview
@@ -88,15 +88,15 @@ str(Cripto_index_ordered)
 summary(Cripto_index_ordered)
 sd(Cripto_index_ordered$Adjusted)
 
-meanLTC <- mean(LTCwith_ticket$Adjusted)
-meanETH <- mean(ETHwith_ticket$Adjusted)
-meanXRP <- mean(XRPwith_ticket$Adjusted)
-meanBTC <- mean(BTCwith_ticket$Adjusted)
+meanLTC <- mean(LTCwith_ticker$Adjusted)
+meanETH <- mean(ETHwith_ticker$Adjusted)
+meanXRP <- mean(XRPwith_ticker$Adjusted)
+meanBTC <- mean(BTCwith_ticker$Adjusted)
 
-sdLTC <- sd(LTCwith_ticket$Adjusted)
-sdETH <- sd(ETHwith_ticket$Adjusted)
-sdXRP <- sd(XRPwith_ticket$Adjusted)
-sdBTC <- sd(BTCwith_ticket$Adjusted)
+sdLTC <- sd(LTCwith_ticker$Adjusted)
+sdETH <- sd(ETHwith_ticker$Adjusted)
+sdXRP <- sd(XRPwith_ticker$Adjusted)
+sdBTC <- sd(BTCwith_ticker$Adjusted)
 
 CoefLTC <- (sdLTC/meanLTC)*100
 CoefETH <- (sdETH/meanLTC)*100
@@ -125,7 +125,7 @@ df_for_plot <- portfolioPrices %>%
 
 #plot the graphic
 ggplot(df_for_plot, aes(x = Date, y = Price))+
-  geom_line(aes(group = Ticket, linetype = Ticket))+
+  geom_line(aes(group = Ticker, linetype = Ticker))+
   theme(panel.background =  element_blank(),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank())+
