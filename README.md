@@ -3,6 +3,6 @@ In this project I use different tools of R to get information from yahoo about s
 
 Files:
 
-trading_in_r.R (code)
+trading_in_r.R (code with samples)
 
-tutorial.tex (code of PDF to explain the code in trading_in_r)
+
