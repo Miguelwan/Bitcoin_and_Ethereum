@@ -1,0 +1,1258 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Bitcoin vs Ethereum}
+    \author{Miguel Moreno}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+   \begin{abstract}
+   In this notebook we study the correlation between the values
+of Bitcoin and Ethereum during the year 2020, by market capitalization.
+We found that the values of 2020 resembles a linear relation. We model
+this relation by a linear regression and test this model with the value
+of this two cryptoassets of January 2021.
+   \end{abstract}
+
+%Abstract: 
+
+    \section{Introduction}\label{introduction}
+
+During the last years we have seen a raise on the popularity of Bitcoin
+and, as a consequence, a raise on the value of Bitcoin, in July 2020
+Bitcoin reached a value over the 10000 USD. Due to its quick grow many
+people see Bitcoin as a booble and as an unstable assets.
+
+Many articles and news have been written about the high value of
+Bitcoin, but few were written about some other cryptoassets. Bitcoin is
+not the only cryptoassets with a high popularity and gorwing rate.
+Ethereum is the second most popular cryptocurrency which has also gained
+a lot of popularity in the recent years, this has been unnoticed by most
+of the people and mainstream news. It is natural to ask whether there is
+a relation between the values of the different cryptocurrencies, in this
+notebook we study this question for Bitcoin and Ethereum during the
+2020.
+
+Cryptocurrencies are not the only cryptoassets, the introduction of
+Blockchain 2.0 allowed the introduction of different kinds of Token
+which uses blockchains that already exist, such as the Basic Attention
+Token from the browser Brave which usses the Ethereum blockchain. It is
+easy to jump to the conclusion that a rise in the popularity of Ethereum
+would imply a rise on the popularity of tokens based on the Ethereum
+blockchain. In this paper we study the question whether an increase on
+the popularity of Ethereum implies an increase on the popularity of the
+Basic Attention Token.
+
+This notebook and the code used in it can be found in the github of the
+author. The pdf version of this notebook can be found in the webpage of
+the author.
+
+    \section{Preliminaries}\label{preliminaries}
+
+This is a notebook running in Googlecolab in which we will be using R
+for coding and we will use the data from Yahoo finance. Therefore we
+have to activate the magic for R and obtain tha data from Yahoo. In this
+section we will activate R and install/activate the packages that we
+will use.
+
+    Activation of R magic
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}}\PY{k}{load\PYZus{}ext} rpy2.ipython
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/usr/local/lib/python3.6/dist-packages/rpy2/robjects/pandas2ri.py:14: FutureWarning: pandas.core.index is deprecated and will be removed in a future version.  The public classes are available in the top-level namespace.
+  from pandas.core.index import Index as PandasIndex
+/usr/local/lib/python3.6/dist-packages/rpy2/robjects/pandas2ri.py:34: UserWarning: pandas >= 1.0 is not supported.
+  warnings.warn('pandas >= 1.0 is not supported.')
+
+    \end{Verbatim}
+
+    Intall and load the packages
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        install.packages\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{quantmod\PYZsq{}}\PY{p}{)}
+        install.packages\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{dplyr\PYZsq{}}\PY{p}{)}
+        install.packages\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{tidyverse\PYZsq{}}\PY{p}{)}
+        install.packages\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ggplot2\PYZsq{}}\PY{p}{)}
+        install.packages\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{caTools\PYZsq{}}\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}quantmod\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}dplyr\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}tidyverse\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}ggplot2\PY{p}{)}
+        \PY{k+kn}{library}\PY{p}{(}caTools\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Preparation and exploration of the
+data}\label{preparation-and-exploration-of-the-data}
+
+In this section we proceed to obtain the data and do a basic exploration
+of it, to get a basic overview of the values. We will use the data of
+Bitcoin, Ethereum, and the Basic Attention Token. For each one we will
+download the data an plot the Japanese Candllesticks. We will work with
+the adjusted value.
+
+    We will study the time interval os 2020, from 1st of January to the 31st
+of December. We have to define the interval so we can proced with the
+downloading of the data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        starting\PYZus{}date \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{2020\PYZhy{}1\PYZhy{}1\PYZdq{}}
+        final\PYZus{}date \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{2020\PYZhy{}12\PYZhy{}31\PYZdq{}}
+\end{Verbatim}
+
+
+    \subsection{Bitcoin}\label{bitcoin}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        BTCUSD \PY{o}{\PYZlt{}\PYZhy{}} getSymbols.yahoo\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{BTC\PYZhy{}USD\PYZdq{}}\PY{p}{,} from \PY{o}{=} starting\PYZus{}date\PY{p}{,} to \PY{o}{=} final\PYZus{}date\PY{p}{,} auto.assign \PY{o}{=} \PY{n+nb+bp}{F}\PY{p}{)}\PY{p}{[}\PY{p}{,}\PY{p}{]}
+        BTCAdjust \PY{o}{\PYZlt{}\PYZhy{}} BTCUSD\PY{p}{[}\PY{p}{,}\PY{l+m}{6}\PY{p}{]}
+        chartSeries\PY{p}{(}BTCUSD\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Ethereum}\label{ethereum}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        ETHUSD \PY{o}{\PYZlt{}\PYZhy{}} getSymbols.yahoo\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{ETH\PYZhy{}USD\PYZdq{}}\PY{p}{,} from \PY{o}{=} starting\PYZus{}date\PY{p}{,} to \PY{o}{=} final\PYZus{}date\PY{p}{,} auto.assign \PY{o}{=} \PY{n+nb+bp}{F}\PY{p}{)}\PY{p}{[}\PY{p}{,}\PY{p}{]}
+        ETHAdjust \PY{o}{\PYZlt{}\PYZhy{}} ETHUSD\PY{p}{[}\PY{p}{,}\PY{l+m}{6}\PY{p}{]}
+        chartSeries\PY{p}{(}ETHUSD\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Basic Attention Token}\label{basic-attention-token}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        BATUSD \PY{o}{\PYZlt{}\PYZhy{}} getSymbols.yahoo\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{BAT\PYZhy{}USD\PYZdq{}}\PY{p}{,} from \PY{o}{=} starting\PYZus{}date\PY{p}{,} to \PY{o}{=} final\PYZus{}date\PY{p}{,} auto.assign \PY{o}{=} \PY{n+nb+bp}{F}\PY{p}{)}\PY{p}{[}\PY{p}{,}\PY{p}{]}
+        BATAdjust \PY{o}{\PYZlt{}\PYZhy{}} BATUSD\PY{p}{[}\PY{p}{,}\PY{l+m}{6}\PY{p}{]}
+        chartSeries\PY{p}{(}BATUSD\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Exploration of Bitcoin vs
+Ethereum}\label{exploration-of-bitcoin-vs-ethereum}
+
+As we could see in the previous images, Bitcoin and Ethereum have
+similarities in the behaviour of their value. The most notorious are the
+months of February, October, and September. To explore this similarities
+we should look at different indeces.
+
+    Let us start by taking a close look to the adjustment, below we find the
+plot of the adjustment, on top is the Bitcoin and Ethereum is below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        chartSeries\PY{p}{(}BTCAdjust\PY{p}{)}
+        chartSeries\PY{p}{(}ETHAdjust\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Now lets take a look to the Moving Convergence Divergence (MACD), on top
+we can find the plot of BItcoin and below is the Ethereum one.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        \PY{l+s+sb}{`BTCUSD`} \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} chartSeries\PY{p}{(}TA \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{addMACD()\PYZdq{}}\PY{p}{)}
+        \PY{l+s+sb}{`ETHUSD`} \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} chartSeries\PY{p}{(}TA \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{addMACD()\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Now lets take a look to the Relative Strength Index (RSI), on top we can
+find the plot of BItcoin and below is the Ethereum one.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        \PY{l+s+sb}{`BTCUSD`} \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} chartSeries\PY{p}{(}TA \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{addRSI()\PYZdq{}}\PY{p}{)}
+        \PY{l+s+sb}{`ETHUSD`} \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} chartSeries\PY{p}{(}TA \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{addRSI()\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Now lets take a look to the Average True Range (ATR), on top we can find
+the plot of BItcoin and below is the Ethereum one.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        \PY{l+s+sb}{`BTCUSD`} \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} chartSeries\PY{p}{(}TA \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{addATR()\PYZdq{}}\PY{p}{)}
+        \PY{l+s+sb}{`ETHUSD`} \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} chartSeries\PY{p}{(}TA \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{addATR()\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    To get a better overview of the possible correlation between the value
+of these two assets, we shoul plot the variation of adjustment of both
+in the same graphic with respect of the date.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        tickersEB \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{ETH\PYZhy{}USD\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{BTC\PYZhy{}USD\PYZdq{}}\PY{p}{)}
+        portfolioPricesEB \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kc}{NULL}
+        \PY{k+kr}{for} \PY{p}{(}ticker \PY{k+kr}{in} tickersEB\PY{p}{)}\PY{p}{\PYZob{}}
+          portfolioPricesEB \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{cbind}\PY{p}{(}portfolioPricesEB\PY{p}{,} 
+                                   getSymbols.yahoo\PY{p}{(}ticker\PY{p}{,}
+                                                              from \PY{o}{=} starting\PYZus{}date\PY{p}{,} 
+                                                              to \PY{o}{=} final\PYZus{}date\PY{p}{,}
+                                                              periodicity \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{daily\PYZdq{}}\PY{p}{,}
+                                                              auto.assign \PY{o}{=} \PY{n+nb+bp}{F}\PY{p}{)}\PY{p}{[}\PY{p}{,}\PY{l+m}{6}\PY{p}{]}\PY{p}{)}
+          
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        portfolioPricesEB \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{as.data.frame}\PY{p}{(}portfolioPricesEB\PY{p}{)}
+        portfolioPricesEB \PY{o}{\PYZlt{}\PYZhy{}} rownames\PYZus{}to\PYZus{}column\PY{p}{(}portfolioPricesEB\PY{p}{,} var \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Date\PYZdq{}}\PY{p}{)}
+        dfEB\PYZus{}for\PYZus{}plot \PY{o}{\PYZlt{}\PYZhy{}} portfolioPricesEB \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}}
+          gather\PY{p}{(}key \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Ticker\PYZdq{}}\PY{p}{,} value \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Price\PYZdq{}}\PY{p}{,} \PY{o}{\PYZhy{}}Date\PY{p}{)}
+        dfEB\PYZus{}for\PYZus{}plot \PY{o}{\PYZlt{}\PYZhy{}} na.omit\PY{p}{(}dfEB\PYZus{}for\PYZus{}plot\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        ggplot\PY{p}{(}dfEB\PYZus{}for\PYZus{}plot\PY{p}{,} aes\PY{p}{(}x \PY{o}{=} Date\PY{p}{,} y \PY{o}{=} Price\PY{p}{)}\PY{p}{)}\PY{o}{+}
+          geom\PYZus{}line\PY{p}{(}aes\PY{p}{(}group \PY{o}{=} Ticker\PY{p}{,} linetype \PY{o}{=} Ticker\PY{p}{)}\PY{p}{)}\PY{o}{+}
+          theme\PY{p}{(}panel.background \PY{o}{=}  element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                panel.grid.major \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                panel.grid.minor \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{+}
+          labs\PY{p}{(}title \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Price adjusted 2020\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    In priciple, from the previous graphic we could conclude that our
+initial conjecture was mistaken. In the previous graphic we can see huge
+variations on the value of Bitcoin and very small variations on the
+value of Ethereum. But the previous graphic was done with the data with
+no processing, therefore the high value of the Bitcoin could be the
+reason why we see very small changes on the value of Ethereum in the
+graphic and no correlation between the two corruencies.
+
+To take away the noise made by the high value of Bitcoin, we must
+normalize the value of both currencies before we plot both values in the
+same graphic.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        ETHNorm \PY{o}{\PYZlt{}\PYZhy{}} na.omit\PY{p}{(}portfolioPricesEB\PY{p}{)}\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{o}{/}\PY{k+kp}{max}\PY{p}{(}na.omit\PY{p}{(}portfolioPricesEB\PY{p}{)}\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{)}
+        BTCNorm \PY{o}{\PYZlt{}\PYZhy{}} na.omit\PY{p}{(}portfolioPricesEB\PY{p}{)}\PY{p}{[}\PY{l+m}{3}\PY{p}{]}\PY{o}{/}\PY{k+kp}{max}\PY{p}{(}na.omit\PY{p}{(}portfolioPricesEB\PY{p}{)}\PY{p}{[}\PY{l+m}{3}\PY{p}{]}\PY{p}{)}
+        NormEB \PY{o}{=} \PY{k+kt}{data.frame}\PY{p}{(}ETHNorm\PY{p}{,}BTCNorm\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        NormEB \PY{o}{\PYZlt{}\PYZhy{}} rownames\PYZus{}to\PYZus{}column\PY{p}{(}NormEB\PY{p}{,} var \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Date\PYZdq{}}\PY{p}{)}
+        dfEx\PYZus{}for\PYZus{}plot \PY{o}{\PYZlt{}\PYZhy{}} NormEB \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}}
+          gather\PY{p}{(}key \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Ticker\PYZdq{}}\PY{p}{,} value \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Price\PYZdq{}}\PY{p}{,} \PY{o}{\PYZhy{}}Date\PY{p}{)}
+        dfEx\PYZus{}for\PYZus{}plot \PY{o}{\PYZlt{}\PYZhy{}} na.omit\PY{p}{(}dfEx\PYZus{}for\PYZus{}plot\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        ggplot\PY{p}{(}dfEx\PYZus{}for\PYZus{}plot\PY{p}{,} aes\PY{p}{(}x \PY{o}{=} Date\PY{p}{,} y \PY{o}{=} Price\PY{p}{)}\PY{p}{)}\PY{o}{+}
+          geom\PYZus{}line\PY{p}{(}aes\PY{p}{(}group \PY{o}{=} Ticker\PY{p}{,} linetype \PY{o}{=} Ticker\PY{p}{)}\PY{p}{)}\PY{o}{+}
+          theme\PY{p}{(}panel.background \PY{o}{=}  element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                panel.grid.major \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                panel.grid.minor \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{+}
+          labs\PY{p}{(}title \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Price normalized 2020\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    After normalizing both values, we see that both graphics overlap in most
+of the changes when the value drops (or increase) "drastically", as we
+can see from the graphic above.
+
+Finally we plot the value of Ethereum as a dependence variable of the
+value of Bitcoin. With this, we try to understand the value of Ethereum
+as a direct result of the value of Bitcoin. This graphic will give us a
+better idea of their correlation, it worth to mention that the date is
+not taken into account for this plot. Therefore, we don't see the
+evolution of the values but the possible relation between them.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        dataEB \PY{o}{\PYZlt{}\PYZhy{}} na.omit\PY{p}{(}portfolioPricesEB\PY{p}{)}
+        ggplot\PY{p}{(}dataEB\PY{p}{,} aes\PY{p}{(}x \PY{o}{=} BTC.USD.Adjusted\PY{p}{,} y \PY{o}{=} ETH.USD.Adjusted\PY{p}{)}\PY{p}{)} \PY{o}{+} geom\PYZus{}point\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_34_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As we can see in the previous graphic, the relation we have been
+observing resembles a line.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        ggplot\PY{p}{(}dataEB\PY{p}{,} aes\PY{p}{(}x \PY{o}{=} BTC.USD.Adjusted\PY{p}{,} y \PY{o}{=} ETH.USD.Adjusted\PY{p}{)}\PY{p}{)} \PY{o}{+} geom\PYZus{}point\PY{p}{(}\PY{p}{)} \PY{o}{+}  geom\PYZus{}smooth\PY{p}{(}method \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{lm\PYZdq{}}\PY{p}{,} se \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{,} color \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{black\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+R[write to console]: `geom\_smooth()` using formula 'y \textasciitilde{} x'
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Ethereum vs Basic Attention
+Token}\label{ethereum-vs-basic-attention-token}
+
+As we could see in the previous images, Ethereum and the Basic Attention
+Token have no many similarities in the behaviour of their value. We can
+also see that the months of February and Octber show some similarity. To
+explore whether there is or not a possible correlation, we should look
+at different indeces.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        chartSeries\PY{p}{(}ETHAdjust\PY{p}{)}
+        chartSeries\PY{p}{(}BATAdjust\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Now lets take a look to the Moving Convergence Divergence (MACD), on top
+we can find the plot of Ethereum and below is the Basic Attention Token
+one.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        \PY{l+s+sb}{`ETHUSD`} \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} chartSeries\PY{p}{(}TA \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{addMACD()\PYZdq{}}\PY{p}{)}
+        \PY{l+s+sb}{`BATUSD`} \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} chartSeries\PY{p}{(}TA \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{addMACD()\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Now lets take a look to the Relative Strength Index (RSI), on top we can
+find the plot of Ethereum and below is the Basic Attention Token one.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        \PY{l+s+sb}{`ETHUSD`} \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} chartSeries\PY{p}{(}TA \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{addRSI()\PYZdq{}}\PY{p}{)}
+        \PY{l+s+sb}{`BATUSD`} \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} chartSeries\PY{p}{(}TA \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{addRSI()\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Now lets take a look to the Average True Range (ATR), on top we can find
+the plot of Ethereum and below is the Basic Attention Token one.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        \PY{l+s+sb}{`ETHUSD`} \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} chartSeries\PY{p}{(}TA \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{addATR()\PYZdq{}}\PY{p}{)}
+        \PY{l+s+sb}{`BATUSD`} \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}} chartSeries\PY{p}{(}TA \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{addATR()\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    In the previous graphic we can see that besides February and October, we
+cannot see more similarities. We shoul plot the variation of adjustment
+of both assets in the same graphic with respect of the date, in order to
+corroborate that there is no correlation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        tickersEBAT \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kt}{c}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{BAT\PYZhy{}USD\PYZdq{}}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{ETH\PYZhy{}USD\PYZdq{}}\PY{p}{)}
+        portfolioPricesEBAT \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kc}{NULL}
+        \PY{k+kr}{for} \PY{p}{(}ticker \PY{k+kr}{in} tickersEBAT\PY{p}{)}\PY{p}{\PYZob{}}
+          portfolioPricesEBAT \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{cbind}\PY{p}{(}portfolioPricesEBAT\PY{p}{,} 
+                                   getSymbols.yahoo\PY{p}{(}ticker\PY{p}{,}
+                                                              from \PY{o}{=} starting\PYZus{}date\PY{p}{,} 
+                                                              to \PY{o}{=} final\PYZus{}date\PY{p}{,}
+                                                              periodicity \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{daily\PYZdq{}}\PY{p}{,}
+                                                              auto.assign \PY{o}{=} \PY{n+nb+bp}{F}\PY{p}{)}\PY{p}{[}\PY{p}{,}\PY{l+m}{6}\PY{p}{]}\PY{p}{)}
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        portfolioPricesEBAT \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{as.data.frame}\PY{p}{(}portfolioPricesEBAT\PY{p}{)}
+        portfolioPricesEBAT \PY{o}{\PYZlt{}\PYZhy{}} rownames\PYZus{}to\PYZus{}column\PY{p}{(}portfolioPricesEBAT\PY{p}{,} var \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Date\PYZdq{}}\PY{p}{)}
+        dfEBAT\PYZus{}for\PYZus{}plot \PY{o}{\PYZlt{}\PYZhy{}} portfolioPricesEBAT \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}}
+          gather\PY{p}{(}key \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Ticker\PYZdq{}}\PY{p}{,} value \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Price\PYZdq{}}\PY{p}{,} \PY{o}{\PYZhy{}}Date\PY{p}{)}
+        dfEBAT\PYZus{}for\PYZus{}plot \PY{o}{\PYZlt{}\PYZhy{}} na.omit\PY{p}{(}dfEBAT\PYZus{}for\PYZus{}plot\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        ggplot\PY{p}{(}dfEBAT\PYZus{}for\PYZus{}plot\PY{p}{,} aes\PY{p}{(}x \PY{o}{=} Date\PY{p}{,} y \PY{o}{=} Price\PY{p}{)}\PY{p}{)}\PY{o}{+}
+          geom\PYZus{}line\PY{p}{(}aes\PY{p}{(}group \PY{o}{=} Ticker\PY{p}{,} linetype \PY{o}{=} Ticker\PY{p}{)}\PY{p}{)}\PY{o}{+}
+          theme\PY{p}{(}panel.background \PY{o}{=}  element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                panel.grid.major \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                panel.grid.minor \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{+}
+          labs\PY{p}{(}title \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Price adjusted 2020\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    In priciple, from the previous graphic we could conclude that our
+initial conjecture is true. In the previous graphic we can see huge
+variations on the value of Ethereum and no variations on the value of
+the Basic Attention Token. But the previous graphic was done with the
+data with no processing, therefore the high value of the Ethereum could
+be the reason why we see no changes on the value of the Basic Attention
+Token in the graphic and no correlation between the two corruencies.
+
+To take away the noise made by the high value of Ethereum, we must
+normalize the value of both currencies before we plot both values in the
+same graphic.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        BATNorm \PY{o}{\PYZlt{}\PYZhy{}} na.omit\PY{p}{(}portfolioPricesEBAT\PY{p}{)}\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{o}{/}\PY{k+kp}{max}\PY{p}{(}na.omit\PY{p}{(}portfolioPricesEBAT\PY{p}{)}\PY{p}{[}\PY{l+m}{2}\PY{p}{]}\PY{p}{)}
+        ETHNorm \PY{o}{\PYZlt{}\PYZhy{}} na.omit\PY{p}{(}portfolioPricesEBAT\PY{p}{)}\PY{p}{[}\PY{l+m}{3}\PY{p}{]}\PY{o}{/}\PY{k+kp}{max}\PY{p}{(}na.omit\PY{p}{(}portfolioPricesEBAT\PY{p}{)}\PY{p}{[}\PY{l+m}{3}\PY{p}{]}\PY{p}{)}
+        NormEBAT \PY{o}{=} \PY{k+kt}{data.frame}\PY{p}{(}BATNorm\PY{p}{,}ETHNorm\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        NormEBAT \PY{o}{\PYZlt{}\PYZhy{}} rownames\PYZus{}to\PYZus{}column\PY{p}{(}NormEBAT\PY{p}{,} var \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Date\PYZdq{}}\PY{p}{)}
+        dfEn\PYZus{}for\PYZus{}plot \PY{o}{\PYZlt{}\PYZhy{}} NormEBAT \PY{o}{\PYZpc{}\PYZgt{}\PYZpc{}}
+          gather\PY{p}{(}key \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Ticker\PYZdq{}}\PY{p}{,} value \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Price\PYZdq{}}\PY{p}{,} \PY{o}{\PYZhy{}}Date\PY{p}{)}
+        dfEn\PYZus{}for\PYZus{}plot \PY{o}{\PYZlt{}\PYZhy{}} na.omit\PY{p}{(}dfEn\PYZus{}for\PYZus{}plot\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        ggplot\PY{p}{(}dfEn\PYZus{}for\PYZus{}plot\PY{p}{,} aes\PY{p}{(}x \PY{o}{=} Date\PY{p}{,} y \PY{o}{=} Price\PY{p}{)}\PY{p}{)}\PY{o}{+}
+          geom\PYZus{}line\PY{p}{(}aes\PY{p}{(}group \PY{o}{=} Ticker\PY{p}{,} linetype \PY{o}{=} Ticker\PY{p}{)}\PY{p}{)}\PY{o}{+}
+          theme\PY{p}{(}panel.background \PY{o}{=}  element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                panel.grid.major \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                panel.grid.minor \PY{o}{=} element\PYZus{}blank\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{+}
+          labs\PY{p}{(}title \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{Price normalized 2020\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_52_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    After normalizing both values, we see that both graphics overlap very
+rarely.
+
+Finally we plot the value of the Basic Attention Token as a dependence
+variable of the value of Ethereum. With this, we will see that our
+conjecture was correct and there is not a strong correlation. It worth
+to mention that the date is not taken into account for this plot.
+Therefore, we don't see the evolution of the values but the possible
+relation between them.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        dataEBAT \PY{o}{\PYZlt{}\PYZhy{}} na.omit\PY{p}{(}portfolioPricesEBAT\PY{p}{)}
+        ggplot\PY{p}{(}dataEBAT\PY{p}{,} aes\PY{p}{(}x \PY{o}{=} ETH.USD.Adjusted\PY{p}{,} y \PY{o}{=} BAT.USD.Adjusted\PY{p}{)}\PY{p}{)} \PY{o}{+} geom\PYZus{}point\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_54_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{The correlation between Bitcoin vs
+Ethereum}\label{the-correlation-between-bitcoin-vs-ethereum}
+
+In the previous section we explore the data of Bitcoin and Ethereum and
+found that their value might be related via a linear function. In this
+section we will explore more the conjecture that the value of these two
+assets are related linearly. The first step will be to test the
+correlation between the two variables.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        cor.test\PY{p}{(}dataEB\PY{p}{[}\PY{p}{,}\PY{l+m}{3}\PY{p}{]}\PY{p}{,} dataEB\PY{p}{[}\PY{p}{,}\PY{l+m}{2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+	Pearson's product-moment correlation
+
+data:  dataEB[, 3] and dataEB[, 2]
+t = 52.925, df = 360, p-value < 2.2e-16
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.9283361 0.9520370
+sample estimates:
+      cor 
+0.9413364 
+
+
+    \end{Verbatim}
+
+    As we can see that the p-value is very low. Therefore we should do a
+linear regression to build a model and test the model with new data,
+this in order to understand if the behaviour exposed by Bitcoin and
+Ethereum during 2020 was a singularity of that time interval, or if the
+value of both assets are linearly related in genral via the market cap
+and traders.
+
+    \subsection{Buulding and testing the
+model}\label{buulding-and-testing-the-model}
+
+Even though we could build the model with all the data of 2020 and test
+it with the data of 2021, we will divide the data in a training set and
+test set for good practices and to not build a "perfect model" that is
+not good to make predictions.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        split \PY{o}{=} sample.split\PY{p}{(}dataEB\PY{o}{\PYZdl{}}ETH.USD.Adjusted\PY{p}{,} SplitRatio \PY{o}{=} \PY{l+m}{0.8}\PY{p}{)}
+        training\PYZus{}set \PY{o}{=} \PY{k+kp}{subset}\PY{p}{(}dataEB\PY{p}{,} split \PY{o}{==} \PY{k+kc}{TRUE}\PY{p}{)}
+        test\PYZus{}set \PY{o}{=} \PY{k+kp}{subset}\PY{p}{(}dataEB\PY{p}{,} split \PY{o}{==} \PY{k+kc}{FALSE}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        regressor \PY{o}{=} lm\PY{p}{(}formula \PY{o}{=} ETH.USD.Adjusted \PY{o}{\PYZti{}} BTC.USD.Adjusted\PY{p}{,} 
+                       data \PY{o}{=} training\PYZus{}set\PY{p}{)}
+\end{Verbatim}
+
+
+    Now that we have build the model, we can plot the test set of 2020 (the
+points in red) against the prediction of our model (the blue line). We
+can also compare our model with our initial overview of the correlation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        ggplot\PY{p}{(}\PY{p}{)} \PY{o}{+}
+          geom\PYZus{}point\PY{p}{(}aes\PY{p}{(}x \PY{o}{=} test\PYZus{}set\PY{o}{\PYZdl{}}BTC.USD.Adjusted\PY{p}{,} y \PY{o}{=} test\PYZus{}set\PY{o}{\PYZdl{}}ETH.USD.Adjusted\PY{p}{)}\PY{p}{,} 
+                     colour \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{red\PYZsq{}}\PY{p}{)} \PY{o}{+}
+          geom\PYZus{}line\PY{p}{(}aes\PY{p}{(}x \PY{o}{=} training\PYZus{}set\PY{o}{\PYZdl{}}BTC.USD.Adjusted\PY{p}{,} y \PY{o}{=} predict\PY{p}{(}regressor\PY{p}{,} newdata \PY{o}{=} training\PYZus{}set\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                    colour \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{blue\PYZsq{}}\PY{p}{)} \PY{o}{+}
+          xlab\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{BTC\PYZsq{}}\PY{p}{)} \PY{o}{+}
+          ylab\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ETH\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        ggplot\PY{p}{(}dataEB\PY{p}{,} aes\PY{p}{(}x \PY{o}{=} BTC.USD.Adjusted\PY{p}{,} y \PY{o}{=} ETH.USD.Adjusted\PY{p}{)}\PY{p}{)} \PY{o}{+} geom\PYZus{}point\PY{p}{(}\PY{p}{)} \PY{o}{+}  geom\PYZus{}smooth\PY{p}{(}method \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{lm\PYZdq{}}\PY{p}{,} se \PY{o}{=} \PY{k+kc}{TRUE}\PY{p}{,} color \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{black\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+R[write to console]: `geom\_smooth()` using formula 'y \textasciitilde{} x'
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_63_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Predicting new data (January
+2021)}\label{predicting-new-data-january-2021}
+
+Now that we have build our model and seen that it fits with our initial
+conjecture, we can proceed to test the model with the data of January
+2021. With this test we can conclude whether the correlation observed in
+2020 trend to continue during 2021, or if the recent moves in the market
+has modify this relation. We will start by downloading the data and
+showiong the Japanese Candlesticks before we apply our model, this
+should gives us an initial intuition about how well our model behaves
+with the new data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        starting\PYZus{}prediction\PYZus{}date \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{2021\PYZhy{}1\PYZhy{}1\PYZdq{}}
+        final\PYZus{}prediction\PYZus{}date \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{2021\PYZhy{}1\PYZhy{}31\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        BTCUSD\PYZus{}for\PYZus{}prediction \PY{o}{\PYZlt{}\PYZhy{}} getSymbols.yahoo\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{BTC\PYZhy{}USD\PYZdq{}}\PY{p}{,} from \PY{o}{=} starting\PYZus{}prediction\PYZus{}date\PY{p}{,} to \PY{o}{=} final\PYZus{}prediction\PYZus{}date\PY{p}{,} auto.assign \PY{o}{=} \PY{n+nb+bp}{F}\PY{p}{)}\PY{p}{[}\PY{p}{,}\PY{p}{]}
+        BTCAdjust\PYZus{}for\PYZus{}prediction \PY{o}{\PYZlt{}\PYZhy{}} BTCUSD\PYZus{}for\PYZus{}prediction\PY{p}{[}\PY{p}{,}\PY{l+m}{6}\PY{p}{]}
+        chartSeries\PY{p}{(}BTCUSD\PYZus{}for\PYZus{}prediction\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_66_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        ETHUSD\PYZus{}for\PYZus{}prediction \PY{o}{\PYZlt{}\PYZhy{}} getSymbols.yahoo\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{ETH\PYZhy{}USD\PYZdq{}}\PY{p}{,} from \PY{o}{=} starting\PYZus{}prediction\PYZus{}date\PY{p}{,} to \PY{o}{=} final\PYZus{}prediction\PYZus{}date\PY{p}{,} auto.assign \PY{o}{=} \PY{n+nb+bp}{F}\PY{p}{)}\PY{p}{[}\PY{p}{,}\PY{p}{]}
+        ETHAdjust\PYZus{}for\PYZus{}prediction \PY{o}{\PYZlt{}\PYZhy{}} ETHUSD\PYZus{}for\PYZus{}prediction\PY{p}{[}\PY{p}{,}\PY{l+m}{6}\PY{p}{]}
+        chartSeries\PY{p}{(}ETHUSD\PYZus{}for\PYZus{}prediction\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_67_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From the two previous graphics we could conclude that the relation
+between both assets during 2021 will not follow the trend of 2020. We
+can observe that Bitcoin has lost a lot of value in the last two thirds
+of January, meanwhile Ethereum has had a constant growing trend during
+January. Even though it lost a lot of value during some days, Ethereum
+recovers the value very quick.
+
+Let us prepare the data and test our model with the new data, being the
+data point the red ones and the model prediction the blue line.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        EB\PYZus{}for\PYZus{}prediction \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kc}{NULL}
+        \PY{k+kr}{for} \PY{p}{(}ticker \PY{k+kr}{in} tickersEB\PY{p}{)}\PY{p}{\PYZob{}}
+          EB\PYZus{}for\PYZus{}prediction \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{cbind}\PY{p}{(}EB\PYZus{}for\PYZus{}prediction\PY{p}{,} 
+                                   getSymbols.yahoo\PY{p}{(}ticker\PY{p}{,}
+                                                              from \PY{o}{=} starting\PYZus{}prediction\PYZus{}date\PY{p}{,} 
+                                                              to \PY{o}{=} final\PYZus{}prediction\PYZus{}date\PY{p}{,}
+                                                              periodicity \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{daily\PYZdq{}}\PY{p}{,}
+                                                              auto.assign \PY{o}{=} \PY{n+nb+bp}{F}\PY{p}{)}\PY{p}{[}\PY{p}{,}\PY{l+m}{6}\PY{p}{]}\PY{p}{)}
+          
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        ETH\PYZus{}pred \PY{o}{=} \PY{k+kt}{data.frame}\PY{p}{(}EB\PYZus{}for\PYZus{}prediction\PY{o}{\PYZdl{}}BTC.USD.Adjusted\PY{p}{,} predict\PY{p}{(}regressor\PY{p}{,} newdata \PY{o}{=} EB\PYZus{}for\PYZus{}prediction\PY{p}{)}\PY{p}{)}
+        \PY{k+kp}{names}\PY{p}{(}ETH\PYZus{}pred\PY{p}{)}\PY{p}{[}\PY{l+m}{2}\PY{p}{]} \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ETH.USD.Adjusted\PYZdq{}}
+        ETH\PYZus{}pred\PY{o}{\PYZlt{}\PYZhy{}} ETH\PYZus{}pred\PY{p}{[}\PY{p}{,} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{1}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        ggplot\PY{p}{(}\PY{p}{)} \PY{o}{+}
+               geom\PYZus{}line\PY{p}{(}aes\PY{p}{(}x \PY{o}{=} ETH\PYZus{}pred\PY{o}{\PYZdl{}}BTC.USD.Adjusted\PY{p}{,} y \PY{o}{=} ETH\PYZus{}pred\PY{o}{\PYZdl{}}ETH.USD.Adjusted\PY{p}{)} \PY{p}{,} colour \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{blue\PYZsq{}}\PY{p}{)} \PY{o}{+}
+               geom\PYZus{}point\PY{p}{(}aes\PY{p}{(}x \PY{o}{=} EB\PYZus{}for\PYZus{}prediction\PY{o}{\PYZdl{}}BTC.USD.Adjusted\PY{p}{,} y \PY{o}{=} EB\PYZus{}for\PYZus{}prediction\PY{o}{\PYZdl{}}ETH.USD.Adjusted\PY{p}{)} \PY{p}{,} colour \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{red\PYZsq{}}\PY{p}{)} \PY{o}{+}
+               xlab\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{BTC\PYZsq{}}\PY{p}{)} \PY{o}{+}
+               ylab\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ETH\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_71_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As we can see in the previous graphic, our model fails to predict the
+relation between this two assets observed during 2021.
+
+    \subsection{The big picture}\label{the-big-picture}
+
+Before we make conclusion we have to get the big picture. We know that
+this is a small set of data and the error observed in this picture may
+be less than the error produced when the model was constructed with the
+2020 data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        EB\PYZus{}whole \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kc}{NULL}
+        \PY{k+kr}{for} \PY{p}{(}ticker \PY{k+kr}{in} tickersEB\PY{p}{)}\PY{p}{\PYZob{}}
+          EB\PYZus{}whole \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{cbind}\PY{p}{(}EB\PYZus{}whole\PY{p}{,} 
+                                   getSymbols.yahoo\PY{p}{(}ticker\PY{p}{,}
+                                                              from \PY{o}{=} starting\PYZus{}date\PY{p}{,} 
+                                                              to \PY{o}{=} final\PYZus{}prediction\PYZus{}date\PY{p}{,}
+                                                              periodicity \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{daily\PYZdq{}}\PY{p}{,}
+                                                              auto.assign \PY{o}{=} \PY{n+nb+bp}{F}\PY{p}{)}\PY{p}{[}\PY{p}{,}\PY{l+m}{6}\PY{p}{]}\PY{p}{)}
+          
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        ETH\PYZus{}pred\PYZus{}whole \PY{o}{=} \PY{k+kt}{data.frame}\PY{p}{(}EB\PYZus{}whole\PY{o}{\PYZdl{}}BTC.USD.Adjusted\PY{p}{,} predict\PY{p}{(}regressor\PY{p}{,} newdata \PY{o}{=} EB\PYZus{}whole\PY{p}{)}\PY{p}{)}
+        \PY{k+kp}{names}\PY{p}{(}ETH\PYZus{}pred\PYZus{}whole\PY{p}{)}\PY{p}{[}\PY{l+m}{2}\PY{p}{]} \PY{o}{\PYZlt{}\PYZhy{}} \PY{l+s}{\PYZdq{}}\PY{l+s}{ETH.USD.Adjusted\PYZdq{}}
+        ETH\PYZus{}pred\PYZus{}whole\PY{o}{\PYZlt{}\PYZhy{}} ETH\PYZus{}pred\PYZus{}whole\PY{p}{[}\PY{p}{,} \PY{k+kt}{c}\PY{p}{(}\PY{l+m}{2}\PY{p}{,}\PY{l+m}{1}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        ggplot\PY{p}{(}\PY{p}{)} \PY{o}{+}
+               geom\PYZus{}line\PY{p}{(}aes\PY{p}{(}x \PY{o}{=} ETH\PYZus{}pred\PYZus{}whole\PY{o}{\PYZdl{}}BTC.USD.Adjusted\PY{p}{,} y \PY{o}{=} ETH\PYZus{}pred\PYZus{}whole\PY{o}{\PYZdl{}}ETH.USD.Adjusted\PY{p}{)} \PY{p}{,} colour \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{blue\PYZsq{}}\PY{p}{)} \PY{o}{+}
+               geom\PYZus{}point\PY{p}{(}aes\PY{p}{(}x \PY{o}{=} EB\PYZus{}whole\PY{o}{\PYZdl{}}BTC.USD.Adjusted\PY{p}{,} y \PY{o}{=} EB\PYZus{}whole\PY{o}{\PYZdl{}}ETH.USD.Adjusted\PY{p}{)} \PY{p}{,} colour \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{red\PYZsq{}}\PY{p}{)} \PY{o}{+}
+               xlab\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{BTC\PYZsq{}}\PY{p}{)} \PY{o}{+}
+               ylab\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ETH\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_76_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As we can observe in the previous graphic in which we used the data from
+2020 and the one from January 2021, the linear relation that we observed
+during 2020 does not hold any longer with the new data.
+
+    \subsection{The Volume}\label{the-volume}
+
+Let us finish the section by taking a look to the volume of of Bitcoin
+and Ethereum. We have seen that during 2020 the value of both assets
+were related, now the question is whether the volume are also related.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        BTCVolume \PY{o}{\PYZlt{}\PYZhy{}} BTCUSD\PY{p}{[}\PY{p}{,}\PY{l+m}{5}\PY{p}{]}
+        chartSeries\PY{p}{(}BTCVolume\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_79_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        ETHVolume \PY{o}{\PYZlt{}\PYZhy{}} ETHUSD\PY{p}{[}\PY{p}{,}\PY{l+m}{5}\PY{p}{]}
+        chartSeries\PY{p}{(}ETHVolume\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_80_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can see in the graphics above that the volumes lokk very similar.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        EB\PYZus{}Volume \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kc}{NULL}
+        \PY{k+kr}{for} \PY{p}{(}ticker \PY{k+kr}{in} tickersEB\PY{p}{)}\PY{p}{\PYZob{}}
+          EB\PYZus{}Volume \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{cbind}\PY{p}{(}EB\PYZus{}Volume\PY{p}{,} 
+                                   getSymbols.yahoo\PY{p}{(}ticker\PY{p}{,}
+                                                              from \PY{o}{=} starting\PYZus{}date\PY{p}{,} 
+                                                              to \PY{o}{=} final\PYZus{}date\PY{p}{,}
+                                                              periodicity \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{daily\PYZdq{}}\PY{p}{,}
+                                                              auto.assign \PY{o}{=} \PY{n+nb+bp}{F}\PY{p}{)}\PY{p}{[}\PY{p}{,}\PY{l+m}{5}\PY{p}{]}\PY{p}{)}
+          
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        EB\PYZus{}Volume \PY{o}{\PYZlt{}\PYZhy{}} na.omit\PY{p}{(}EB\PYZus{}Volume\PY{p}{)}
+        ggplot\PY{p}{(}EB\PYZus{}Volume\PY{p}{,} aes\PY{p}{(}x \PY{o}{=} BTC.USD.Volume\PY{p}{,} y \PY{o}{=} ETH.USD.Volume\PY{p}{)}\PY{p}{)} \PY{o}{+} geom\PYZus{}point\PY{p}{(}colour \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{red\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_83_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From the previous picture we can conclude that the volumes are related
+but the trend is not clearly linear as in the case of the values.
+
+    \section{The correlation between Ethereum and the Basic Attention
+Token}\label{the-correlation-between-ethereum-and-the-basic-attention-token}
+
+As we saw in the third section, the value of Ethereum and the value of
+the Basic Attention Token have no correlation. In this section we will
+take a look to the volume of these two assets, this would give us an
+overview of the popularity of both assets.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        ETHVolume \PY{o}{\PYZlt{}\PYZhy{}} ETHUSD\PY{p}{[}\PY{p}{,}\PY{l+m}{5}\PY{p}{]}
+        chartSeries\PY{p}{(}ETHVolume\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_86_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        BATVolume \PY{o}{\PYZlt{}\PYZhy{}} BATUSD\PY{p}{[}\PY{p}{,}\PY{l+m}{5}\PY{p}{]}
+        chartSeries\PY{p}{(}BATVolume\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_87_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From the previous images it is not clear if there is a corelation
+between these two volumes, in the first part of 2020 the volumes are
+clearly not corelated, but in the second part the volumes look similar.
+To get a better understanding we should plot the volume of the Basic
+Attention Token as a dependent variable of the volume of Ethereum.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        EBAT\PYZus{}Volume \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kc}{NULL}
+        \PY{k+kr}{for} \PY{p}{(}ticker \PY{k+kr}{in} tickersEBAT\PY{p}{)}\PY{p}{\PYZob{}}
+          EBAT\PYZus{}Volume \PY{o}{\PYZlt{}\PYZhy{}} \PY{k+kp}{cbind}\PY{p}{(}EBAT\PYZus{}Volume\PY{p}{,} 
+                                   getSymbols.yahoo\PY{p}{(}ticker\PY{p}{,}
+                                                              from \PY{o}{=} starting\PYZus{}date\PY{p}{,} 
+                                                              to \PY{o}{=} final\PYZus{}date\PY{p}{,}
+                                                              periodicity \PY{o}{=} \PY{l+s}{\PYZdq{}}\PY{l+s}{daily\PYZdq{}}\PY{p}{,}
+                                                              auto.assign \PY{o}{=} \PY{n+nb+bp}{F}\PY{p}{)}\PY{p}{[}\PY{p}{,}\PY{l+m}{5}\PY{p}{]}\PY{p}{)}
+          
+        \PY{p}{\PYZcb{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
+        EBAT\PYZus{}Volume \PY{o}{\PYZlt{}\PYZhy{}} na.omit\PY{p}{(}EBAT\PYZus{}Volume\PY{p}{)}
+        ggplot\PY{p}{(}EBAT\PYZus{}Volume\PY{p}{,} aes\PY{p}{(}x \PY{o}{=} ETH.USD.Volume\PY{p}{,} y \PY{o}{=} BAT.USD.Volume\PY{p}{)}\PY{p}{)} \PY{o}{+} geom\PYZus{}point\PY{p}{(}colour \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{red\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_90_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From the last image we can see that an increase in the volume of
+Ethereum does not implies an increase on the value of the Basic
+Attention Token, this makes us think that these two assets are not
+related in value and neither in volume.
+
+    \section{Conclusions}\label{conclusions}
+
+After making this short study we can conclude that there is a relation
+between Bitcoin and Ethereum, but it looks that this relation is going
+to change during 2021. This could be due to many reasons and it deserves
+further studies. In contrast of the simple idea that a token based on
+the Ethereum blockchain would have a tight relation to Ethereum, we have
+found that this is not neccesarly true. We have show that the Basic
+Attention Token and Ethereum don't have a tight relation neither in
+value nor in volume. Clearly these are not the only cryptoassets, there
+are many other such as Binance coin, Lite coin, etc. This short study
+can be made with any other cryptoassets to understand whether their are
+related via the market cap.
+
+Finally, there is not a general correlation between any two
+cryptoassets, we showed two cases in which the assets are corelated and
+another one in which the assets are not.
+
+\section{Author information}
+
+Miguel Moreno
+
+webpage: miguelmath.com
+
+email: contact@miguelmath.com
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
