@@ -11,6 +11,6 @@ bitcoin_ethereum.ipynb (notebook with a study of the two most popular criptoasse
 
 trading_in_r.R (code with samples and templates)
 
-The PDF related to the notebook can be found <a href="https://www.miguelmath.com/pdfs/BTC-ETH-BAT.pdf">here</a>.
+The PDF related to the notebook can be found <a href="https://www.miguelmath.com/presn/pres-NY-To.pdf">here</a>.
 
 
