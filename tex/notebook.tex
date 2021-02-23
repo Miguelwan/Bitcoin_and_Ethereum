@@ -295,11 +295,11 @@ of this two cryptoassets of January 2021.
 During the last years we have seen a raise on the popularity of Bitcoin
 and, as a consequence, a raise on the value of Bitcoin, in July 2020
 Bitcoin reached a value over the 10000 USD. Due to its quick grow many
-people see Bitcoin as a booble and as an unstable assets.
+people see Bitcoin as a bubble and as an unstable assets.
 
 Many articles and news have been written about the high value of
 Bitcoin, but few were written about some other cryptoassets. Bitcoin is
-not the only cryptoassets with a high popularity and gorwing rate.
+not the only cryptoassets with a high popularity and growing rate.
 Ethereum is the second most popular cryptocurrency which has also gained
 a lot of popularity in the recent years, this has been unnoticed by most
 of the people and mainstream news. It is natural to ask whether there is
@@ -310,7 +310,7 @@ notebook we study this question for Bitcoin and Ethereum during the
 Cryptocurrencies are not the only cryptoassets, the introduction of
 Blockchain 2.0 allowed the introduction of different kinds of Token
 which uses blockchains that already exist, such as the Basic Attention
-Token from the browser Brave which usses the Ethereum blockchain. It is
+Token from the browser Brave which uses the Ethereum blockchain. It is
 easy to jump to the conclusion that a rise in the popularity of Ethereum
 would imply a rise on the popularity of tokens based on the Ethereum
 blockchain. In this paper we study the question whether an increase on
@@ -323,9 +323,9 @@ the author.
 
     \section{Preliminaries}\label{preliminaries}
 
-This is a notebook running in Googlecolab in which we will be using R
+This is a notebook running in Google colab in which we will be using R
 for coding and we will use the data from Yahoo finance. Therefore we
-have to activate the magic for R and obtain tha data from Yahoo. In this
+have to activate the magic for R and obtain the data from Yahoo. In this
 section we will activate R and install/activate the packages that we
 will use.
 
@@ -344,7 +344,7 @@ will use.
 
     \end{Verbatim}
 
-    Intall and load the packages
+    Install and load the packages
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
@@ -367,11 +367,11 @@ data}\label{preparation-and-exploration-of-the-data}
 In this section we proceed to obtain the data and do a basic exploration
 of it, to get a basic overview of the values. We will use the data of
 Bitcoin, Ethereum, and the Basic Attention Token. For each one we will
-download the data an plot the Japanese Candllesticks. We will work with
+download the data an plot the Japanese Candlesticks. We will work with
 the adjusted value.
 
-    We will study the time interval os 2020, from 1st of January to the 31st
-of December. We have to define the interval so we can proced with the
+    We will study the time interval of 2020, from 1st of January to the 31st
+of December. We have to define the interval so we can proceed with the
 downloading of the data.
 
     \begin{Verbatim}[commandchars=\\\{\}]
@@ -426,13 +426,12 @@ downloading of the data.
     \end{center}
     { \hspace*{\fill} \\}
     
-    \subsection{Exploration of Bitcoin vs
-Ethereum}\label{exploration-of-bitcoin-vs-ethereum}
+    \subsection{Exploration of Bitcoin vs Ethereum}\label{exploration-of-bitcoin-vs-ethereum}
 
 As we could see in the previous images, Bitcoin and Ethereum have
-similarities in the behaviour of their value. The most notorious are the
+similarities in the behavior of their value. The most notorious are the
 months of February, October, and September. To explore this similarities
-we should look at different indeces.
+we should look at different indexes.
 
     Let us start by taking a close look to the adjustment, below we find the
 plot of the adjustment, on top is the Bitcoin and Ethereum is below.
@@ -455,7 +454,7 @@ plot of the adjustment, on top is the Bitcoin and Ethereum is below.
     { \hspace*{\fill} \\}
     
     Now lets take a look to the Moving Convergence Divergence (MACD), on top
-we can find the plot of BItcoin and below is the Ethereum one.
+we can find the plot of Bitcoin and below is the Ethereum one.
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
@@ -475,7 +474,7 @@ we can find the plot of BItcoin and below is the Ethereum one.
     { \hspace*{\fill} \\}
     
     Now lets take a look to the Relative Strength Index (RSI), on top we can
-find the plot of BItcoin and below is the Ethereum one.
+find the plot of Bitcoin and below is the Ethereum one.
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
@@ -495,7 +494,7 @@ find the plot of BItcoin and below is the Ethereum one.
     { \hspace*{\fill} \\}
     
     Now lets take a look to the Average True Range (ATR), on top we can find
-the plot of BItcoin and below is the Ethereum one.
+the plot of Bitcoin and below is the Ethereum one.
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
@@ -515,7 +514,7 @@ the plot of BItcoin and below is the Ethereum one.
     { \hspace*{\fill} \\}
     
     To get a better overview of the possible correlation between the value
-of these two assets, we shoul plot the variation of adjustment of both
+of these two assets, we should plot the variation of adjustment of both
 in the same graphic with respect of the date.
 
     \begin{Verbatim}[commandchars=\\\{\}]
@@ -560,13 +559,13 @@ in the same graphic with respect of the date.
     \end{center}
     { \hspace*{\fill} \\}
     
-    In priciple, from the previous graphic we could conclude that our
+    In principle, from the previous graphic we could conclude that our
 initial conjecture was mistaken. In the previous graphic we can see huge
 variations on the value of Bitcoin and very small variations on the
 value of Ethereum. But the previous graphic was done with the data with
 no processing, therefore the high value of the Bitcoin could be the
 reason why we see very small changes on the value of Ethereum in the
-graphic and no correlation between the two corruencies.
+graphic and no correlation between the two currencies.
 
 To take away the noise made by the high value of Bitcoin, we must
 normalize the value of both currencies before we plot both values in the
@@ -648,14 +647,13 @@ R[write to console]: `geom\_smooth()` using formula 'y \textasciitilde{} x'
     \end{center}
     { \hspace*{\fill} \\}
     
-    \subsection{Ethereum vs Basic Attention
-Token}\label{ethereum-vs-basic-attention-token}
+    \subsection{Exploration of Ethereum vs Basic Attention Token}\label{ethereum-vs-basic-attention-token}
 
 As we could see in the previous images, Ethereum and the Basic Attention
-Token have no many similarities in the behaviour of their value. We can
-also see that the months of February and Octber show some similarity. To
+Token have no many similarities in the behavior of their value. We can
+also see that the months of February and October show some similarity. To
 explore whether there is or not a possible correlation, we should look
-at different indeces.
+at different indexes.
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
@@ -736,7 +734,7 @@ the plot of Ethereum and below is the Basic Attention Token one.
     { \hspace*{\fill} \\}
     
     In the previous graphic we can see that besides February and October, we
-cannot see more similarities. We shoul plot the variation of adjustment
+cannot see more similarities. We should plot the variation of adjustment
 of both assets in the same graphic with respect of the date, in order to
 corroborate that there is no correlation.
 
@@ -781,13 +779,13 @@ corroborate that there is no correlation.
     \end{center}
     { \hspace*{\fill} \\}
     
-    In priciple, from the previous graphic we could conclude that our
+    In principle, from the previous graphic we could conclude that our
 initial conjecture is true. In the previous graphic we can see huge
 variations on the value of Ethereum and no variations on the value of
 the Basic Attention Token. But the previous graphic was done with the
 data with no processing, therefore the high value of the Ethereum could
 be the reason why we see no changes on the value of the Basic Attention
-Token in the graphic and no correlation between the two corruencies.
+Token in the graphic and no correlation between the two currencies.
 
 To take away the noise made by the high value of Ethereum, we must
 normalize the value of both currencies before we plot both values in the
@@ -848,8 +846,7 @@ relation between them.
     \end{center}
     { \hspace*{\fill} \\}
     
-    \section{The correlation between Bitcoin vs
-Ethereum}\label{the-correlation-between-bitcoin-vs-ethereum}
+    \section{The correlation between Bitcoin vs Ethereum}\label{the-correlation-between-bitcoin-vs-ethereum}
 
 In the previous section we explore the data of Bitcoin and Ethereum and
 found that their value might be related via a linear function. In this
@@ -881,13 +878,12 @@ sample estimates:
 
     As we can see that the p-value is very low. Therefore we should do a
 linear regression to build a model and test the model with new data,
-this in order to understand if the behaviour exposed by Bitcoin and
+this in order to understand if the behavior exposed by Bitcoin and
 Ethereum during 2020 was a singularity of that time interval, or if the
-value of both assets are linearly related in genral via the market cap
+value of both assets are linearly related in general via the market cap
 and traders.
 
-    \subsection{Buulding and testing the
-model}\label{buulding-and-testing-the-model}
+    \subsection{Building and testing the model}\label{buulding-and-testing-the-model}
 
 Even though we could build the model with all the data of 2020 and test
 it with the data of 2021, we will divide the data in a training set and
@@ -947,15 +943,14 @@ R[write to console]: `geom\_smooth()` using formula 'y \textasciitilde{} x'
     \end{center}
     { \hspace*{\fill} \\}
     
-    \subsection{Predicting new data (January
-2021)}\label{predicting-new-data-january-2021}
+    \subsection{Predicting new data (January 2021)}\label{predicting-new-data-january-2021}
 
 Now that we have build our model and seen that it fits with our initial
 conjecture, we can proceed to test the model with the data of January
 2021. With this test we can conclude whether the correlation observed in
 2020 trend to continue during 2021, or if the recent moves in the market
 has modify this relation. We will start by downloading the data and
-showiong the Japanese Candlesticks before we apply our model, this
+showing the Japanese Candlesticks before we apply our model, this
 should gives us an initial intuition about how well our model behaves
 with the new data.
 
@@ -1092,7 +1087,7 @@ be less than the error produced when the model was constructed with the
 2020 and the one from January 2021, the linear relation that we observed
 during 2020 does not hold any longer with the new data.
 
-    \subsection{The Volume}\label{the-volume}
+    \subsection{The volume}\label{the-volume}
 
 Let us finish the section by taking a look to the volume of of Bitcoin
 and Ethereum. We have seen that during 2020 the value of both assets
@@ -1122,7 +1117,7 @@ were related, now the question is whether the volume are also related.
     \end{center}
     { \hspace*{\fill} \\}
     
-    We can see in the graphics above that the volumes lokk very similar.
+    We can see in the graphics above that the volumes look very similar.
 
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor} }]:} \PY{o}{\PYZpc{}\PYZpc{}}R
@@ -1186,9 +1181,9 @@ overview of the popularity of both assets.
     \end{center}
     { \hspace*{\fill} \\}
     
-    From the previous images it is not clear if there is a corelation
+    From the previous images it is not clear if there is a correlation
 between these two volumes, in the first part of 2020 the volumes are
-clearly not corelated, but in the second part the volumes look similar.
+clearly not correlated, but in the second part the volumes look similar.
 To get a better understanding we should plot the volume of the Basic
 Attention Token as a dependent variable of the volume of Ethereum.
 
@@ -1231,7 +1226,7 @@ between Bitcoin and Ethereum, but it looks that this relation is going
 to change during 2021. This could be due to many reasons and it deserves
 further studies. In contrast of the simple idea that a token based on
 the Ethereum blockchain would have a tight relation to Ethereum, we have
-found that this is not neccesarly true. We have show that the Basic
+found that this is not necessarily true. We have show that the Basic
 Attention Token and Ethereum don't have a tight relation neither in
 value nor in volume. Clearly these are not the only cryptoassets, there
 are many other such as Binance coin, Lite coin, etc. This short study
@@ -1239,7 +1234,7 @@ can be made with any other cryptoassets to understand whether their are
 related via the market cap.
 
 Finally, there is not a general correlation between any two
-cryptoassets, we showed two cases in which the assets are corelated and
+cryptoassets, we showed two cases in which the assets are correlated and
 another one in which the assets are not.
 
 \section{Author information}
