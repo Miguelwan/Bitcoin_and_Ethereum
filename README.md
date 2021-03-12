@@ -5,7 +5,7 @@ The tools in this project can be used to get information from yahoo about
 some criptocurrencies. This information can be use to do simple analysis, see how 
 strong is the currency, etc.
 
-The PDF related to the notebook can be found <a href="https://www.miguelmath.com/pdfs/BTC-ETH-BAT.pdf">here</a>.
+The PDF related to the notebook can be found <a href="https://www.miguelmath.com/articles/BTC-ETH-BAT.pdf">here</a>.
 
 Files:
 
