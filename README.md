@@ -1,6 +1,7 @@
-# Trading and R
+# Bitcoin and Ethereum
 
-In this project I use different tools of R to study the value of Bitcoin and Ethereum.
+In this project we use different tools of R to study the market cap of Bitcoin, Ethereum, and BAT, to determine whether there is an underlying relation between them. We conclude that there was a linear relation between Bitcoin and Ethereum, and no clear relation with BAT.
+
 The tools in this project can be used to get information from yahoo about 
 some criptocurrencies. This information can be use to do simple analysis, see how 
 strong is the currency, etc.
