@@ -1,0 +1,628 @@
+\documentclass[14pt]{amsart}
+\usepackage{amssymb,cmap,verbatim}
+\usepackage{stmaryrd} % to get the proper \bigtriangleup operator for diagonal intersection
+\usepackage{graphicx}
+\usepackage{subcaption}
+
+
+
+\title{Bitcoin vs Ethereum}
+
+
+\author{Miguel Moreno}
+\address{\textit{Github}:Miguelwan}
+\address{\textit{E-mail}:contact@miguelmath.com}
+\address{\textit{Webpage}:http://miguelmath.com}
+
+
+
+
+\begin{document}
+\begin{abstract}
+In this notebook we study the correlation between the values of Bitcoin and Ethereum during the year 2020, by market capitalization. We found that the values of 2020 resembles a linear
+relation. We model this relation by a linear regression and test this model with the value of this
+two cryptoassets of January 2021.
+\end{abstract}
+
+\date{\today}
+
+\maketitle
+
+\section{Introduction}\label{introduction}
+
+During the last years we have seen a raise on the popularity of Bitcoin
+and, as a consequence, a raise on the value of Bitcoin, in July 2020
+Bitcoin reached a value over the 10000 USD. Due to its quick grow many
+people see Bitcoin as a bubble and as an unstable assets.
+
+Many articles and news have been written about the high value of
+Bitcoin, but few were written about some other cryptoassets. Bitcoin is
+not the only cryptoassets with a high popularity and growing rate.
+Ethereum is the second most popular cryptocurrency which has also gained
+a lot of popularity in the recent years, this has been unnoticed by most
+of the people and mainstream news. It is natural to ask whether there is
+a relation between the values of the different cryptocurrencies, in this
+notebook we study this question for Bitcoin and Ethereum during the
+2020.
+
+Cryptocurrencies are not the only cryptoassets, the introduction of
+Blockchain 2.0 allowed the introduction of different kinds of Token
+which uses blockchains that already exist, such as the Basic Attention
+Token from the browser Brave which uses the Ethereum blockchain. It is
+easy to jump to the conclusion that a rise in the popularity of Ethereum
+would imply a rise on the popularity of tokens based on the Ethereum
+blockchain. In this paper we study the question whether an increase on
+the popularity of Ethereum implies an increase on the popularity of the
+Basic Attention Token.
+
+This notebook and the code used in it can be found in the github of the
+author. The pdf version of this notebook can be found in the webpage of
+the author.
+
+    \section{Preliminaries}\label{preliminaries}
+
+This is a notebook running in Google colab in which we will be using R
+for coding and we will use the data from Yahoo finance. Therefore we
+have to activate the magic for R and obtain the data from Yahoo. In this
+section we will install/activate the packages that we
+will use.\\
+
+\noindent \textit{install.packages('quantmod')}\\
+\textit{install.packages('dplyr')}\\
+\textit{install.packages('tidyverse')}\\
+\textit{install.packages('ggplot2')}\\
+\textit{install.packages('caTools')}\\
+\textit{library(quantmod)}\\
+\textit{library(dplyr)}\\
+\textit{library(tidyverse)}\\
+\textit{library(ggplot2)}\\
+\textit{library(caTools)}
+
+
+\section{Preparation and exploration of the data}\label{preparation-and-exploration-of-the-data}
+
+In this section we proceed to obtain the data and do a basic exploration
+of it, to get a basic overview of the values. We will use the data of
+Bitcoin, Ethereum, and the Basic Attention Token. For each one we will
+download the data an plot the Japanese Candlesticks. We will work with
+the adjusted value.
+
+We will study the time interval of 2020, from 1st of January to the 31st
+of December. We have to define the interval so we can proceed with the
+downloading of the data.\\
+
+\noindent \textit{starting$\_$date $<$- "2020-1-1"}\\
+\textit{final$\_$date $<$- "2020-12-31"}\\
+
+{\bf Bitcoin}\\
+
+\noindent \textit{BTCUSD $<$- getSymbols.yahoo("BTC-USD", from = starting$\_$date, to = final$\_$date, auto.assign = F)[,]}\\
+\noindent \textit{BTCAdjust $<$- BTCUSD[,6]}\\
+\noindent \textit{chartSeries(BTCUSD)}\\
+
+
+{\bf Ethereum}\\
+
+\noindent \textit{ETHUSD $<$- getSymbols.yahoo("ETH-USD", from = starting$\_$date, to = final$\_$date, auto.assign = F)[,]}\\
+\noindent \textit{ETHAdjust $<$- ETHUSD[,6]}\\
+\noindent \textit{chartSeries(ETHUSD)}\\
+
+
+{\bf Basic Attention Token}\\
+
+\noindent \textit{BATUSD $<$- getSymbols.yahoo("BAT-USD", from = starting$\_$date, to = final$\_$date, auto.assign = F)[,]}\\
+\noindent \textit{BATAdjust <- BATUSD[,6]}\\
+\noindent \textit{chartSeries(BATUSD)}
+
+
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{1.png}
+    \caption{Bitcoin}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{2.png}
+    \caption{Ethereum}
+  \end{subfigure}
+    \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{3.png}
+    \caption{Basic Attention Token}
+  \end{subfigure}
+  \caption{Japanese Candlesticks of each currency}
+\end{figure}
+
+In Figure 1 we can see the Japanese candlesticks of each currencies.
+
+\subsection{Exploration of Bitcoin vs Ethereum}
+
+As we could see in Figure 1, Bitcoin and Ethereum have similarities in the behavior of their value. The most notorious are the months of February, October, and September. To explore this similarities we should look at different indexes.
+
+Let us start by taking a close look to the adjustment of Bitcoin and Ethereum, Figure 2.\\
+
+\noindent \textit{chartSeries(BTCAdjust)}\\
+\noindent \textit{chartSeries(ETHAdjust)}
+
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{4.png}
+    \caption{Bitcoin}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{5.png}
+    \caption{Ethereum}
+  \end{subfigure}
+  \caption{Adjustment of Bitcoin and Ethereum}
+  \label{fig:coffee}
+\end{figure}
+
+Now lets take a look to the Moving Convergence Divergence (MACD), Figure 3.\\
+
+\noindent \textit{`BTCUSD` $\%>\%$ chartSeries(TA = "addMACD()")}\\
+\noindent \textit{`ETHUSD` $\%>\%$ chartSeries(TA = "addMACD()")}
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{6.png}
+    \caption{Bitcoin}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{7.png}
+    \caption{Ethereum}
+  \end{subfigure}
+  \caption{MACD of Bitcoin and Ethereum}
+  \label{fig:coffee}
+\end{figure}
+
+Now lets take a look to the Relative Strength Index (RSI), Figure 4.\\
+
+\noindent \textit{`BTCUSD` $\%>\%$ chartSeries(TA = "addRSI()")}\\
+\noindent \textit{`ETHUSD` $\%>\%$ chartSeries(TA = "addRSI()")}
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{8.png}
+    \caption{Bitcoin}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{9.png}
+    \caption{Ethereum}
+  \end{subfigure}
+  \caption{RSI of Bitcoin and Ethereum}
+  \label{fig:coffee}
+\end{figure}
+
+Now lets take a look to the Average True Range (ATR), Figure 5.\\
+
+\noindent \textit{`BTCUSD` $\%>\%$ chartSeries(TA = "addATR()")}\\
+\noindent \textit{`ETHUSD` $\%>\%$ chartSeries(TA = "addATR()")}\\
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{10.png}
+    \caption{Bitcoin}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{11.png}
+    \caption{Ethereum}
+  \end{subfigure}
+  \caption{ATR of Bitcoin and Ethereum}
+  \label{fig:coffee}
+\end{figure}
+
+To get a better overview of the possible correlation between the value of these two assets, we should plot the variation of adjustment of both in the same graphic with respect of the date.\\
+
+\noindent \textit{tickersEB $<$- c("ETH-USD", "BTC-USD")}\\
+\noindent \textit{portfolioPricesEB $<$- NULL}\\
+\noindent \textit{for (ticker in tickersEB)$\{$  portfolioPricesEB $<$- cbind(portfolioPricesEB, }\\
+\indent\textit{getSymbols.yahoo(ticker, from = starting$\_$date, to = final$\_$date, }\\
+\indent\textit{periodicity = "daily", auto.assign = F)[,6])$\}$}\\ \\
+
+\noindent \textit{portfolioPricesEB $<$- as.data.frame(portfolioPricesEB)}\\
+\noindent \textit{portfolioPricesEB $<$- rownames$\_$to$\_$column(portfolioPricesEB, var = "Date")}\\
+\noindent \textit{dfEB$\_$for$\_$plot $<$- portfolioPricesEB $\%>\%$ gather(key = "Ticker", }\\
+\indent\textit{value = "Price", -Date)}\\
+\noindent \textit{dfEB$\_$for$\_$plot $<$- na.omit(dfEB$\_$for$\_$plot)}\\ \\
+
+\noindent \textit{ggplot(dfEB$\_$for$\_$plot, aes(x = Date, y = Price))+}\\
+\indent \textit{geom$\_$line(aes(group = Ticker, linetype = Ticker))+}\\
+\indent \textit{theme(panel.background =  element$\_$blank(), }\\
+\indent \textit{panel.grid.major = element$\_$blank(), panel.grid.minor = element$\_$blank())+}\\
+\indent \textit{labs(title = "Price adjusted 2020")}\\
+
+\begin{figure}[h!]
+  \includegraphics[width=0.4\linewidth]{12.png}
+  \caption{Bitcoin vs Ethereum}
+  \label{fig:boat1}
+\end{figure}
+
+In principle, from Figure 6 we could conclude that our initial conjecture was mistaken. In the Figure 6 we can see huge variations on the value of Bitcoin and very small variations on the value of Ethereum. But Figure 6 was done with the data with no processing, therefore the high value of the Bitcoin could be the reason why we see very small changes on the value of Ethereum in the graphic and no correlation between the two currencies.
+
+To take away the noise made by the high value of Bitcoin, we must normalize the value of both currencies before we plot both values in the same graphic.\\
+
+\noindent \textit{ETHNorm $<$- na.omit(portfolioPricesEB)[2]/max(na.omit(portfolioPricesEB)[2])}\\
+\noindent \textit{BTCNorm $<$- na.omit(portfolioPricesEB)[3]/max(na.omit(portfolioPricesEB)[3])}\\
+\noindent \textit{NormEB = data.frame(ETHNorm,BTCNorm)}\\
+
+\noindent \textit{NormEB $<$- rownames$\_$to$\_$column(NormEB, var = "Date")}\\
+\noindent \textit{dfEx$\_$for$\_$plot $<$- NormEB $\%>\%$ gather(key = "Ticker", value = "Price", -Date)}\\
+\noindent \textit{dfEx$\_$for$\_$plot $<$- na.omit(dfEx$\_$for$\_$plot)}\\
+
+\noindent \textit{ggplot(dfEx$\_$for$\_$plot, aes(x = Date, y = Price))+}\\
+\indent \textit{geom$\_$line(aes(group = Ticker, linetype = Ticker))+}\\
+\indent \textit{theme(panel.background =  element$\_$blank(),}\\
+\indent \textit{panel.grid.major = element$\_$blank(), panel.grid.minor = element$\_$blank())+}\\
+\indent \textit{labs(title = "Price normalized 2020")}
+
+\begin{figure}[h!]
+  \includegraphics[width=0.4\linewidth]{13.png}
+  \caption{Bitcoin vs Ethereum normalized}
+  \label{fig:boat1}
+\end{figure}
+
+After normalizing both values, we see in Figure 7 that both graphics overlap in most of the changes when the value drops (or increase) "drastically", as we can see from the graphic above.
+
+Finally we plot the value of Ethereum as a dependence variable of the value of Bitcoin. With this, we try to understand the value of Ethereum as a direct result of the value of Bitcoin. This graphic will give us a better idea of their correlation, it worth to mention that the date is not taken into account for this plot. Therefore, we do not see the evolution of the values but the possible relation between them.\\
+
+\noindent \textit{ggplot(dataEB, aes(x = BTC.USD.Adjusted, y = ETH.USD.Adjusted)) + geom$\_$point() +  geom$\_$smooth(method = "lm", se = TRUE, color = 'black')}
+
+\begin{figure}[h!]
+  \includegraphics[width=0.4\linewidth]{15.png}
+  \caption{Bitcoin-Ethereum relation}
+  \label{fig:boat1}
+\end{figure}
+
+As we can see in Figure 8 graphic, the relation we have been observing resembles a line.
+
+\subsection{Exploration of Ethereum vs Basic Attention Token}
+As we could see in the previous images, Ethereum and the Basic Attention Token have no many similarities in the behavior of their value. We can also see that the months of February and October show some similarity. To explore whether there is or not a possible correlation, we should look at different indexes, Figure 9.\\
+
+\noindent \textit{chartSeries(ETHAdjust)}\\
+\noindent \textit{chartSeries(BATAdjust)}
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{16.png}
+    \caption{Ethereum}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{17.png}
+    \caption{Basic Attention Token}
+  \end{subfigure}
+  \caption{Adjustment of Ethereum and Basic Attention Token}
+  \label{fig:coffee}
+\end{figure}
+
+Now lets take a look to the Moving Convergence Divergence (MACD), Figure 10.\\
+
+\noindent \textit{`ETHUSD` $\%>\%$ chartSeries(TA = "addMACD()")}\\
+\noindent \textit{`BATUSD` $\%>\%$ chartSeries(TA = "addMACD()")}
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{18.png}
+    \caption{Ethereumn}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{19.png}
+    \caption{Basic Attention Token}
+  \end{subfigure}
+  \caption{MACD of Ethereum and Basic Attention Token}
+  \label{fig:coffee}
+\end{figure}
+
+Now lets take a look to the Relative Strength Index (RSI), Figure 11.\\
+
+\noindent \textit{`ETHUSD` $\%>\%$ chartSeries(TA = "addRSI()")}\\
+\noindent \textit{`BATUSD` $\%>\%$ chartSeries(TA = "addRSI()")}
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{20.png}
+    \caption{Ethereum}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{21.png}
+    \caption{Basic Attention Token}
+  \end{subfigure}
+  \caption{RSI of Ethereum and Basic Attention Token}
+  \label{fig:coffee}
+\end{figure}
+
+Now lets take a look to the Average True Range (ATR), Figure 12.\\
+
+\noindent \textit{`ETHUSD` $\%>\%$ chartSeries(TA = "addATR()")}\\
+\noindent \textit{`BATUSD` $\%>\%$ chartSeries(TA = "addATR()")}\\
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{22.png}
+    \caption{Ethereum}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{23.png}
+    \caption{Basic Attention Token}
+  \end{subfigure}
+  \caption{ATR of Ethereum and Basic Attention Token}
+  \label{fig:coffee}
+\end{figure}
+
+From the Figures 9 to 12 we can see that besides February and October, we cannot see more similarities. We should plot the variation of adjustment of both assets in the same graphic with respect of the date, in order to corroborate that there is no correlation.\\
+
+\noindent \textit{tickersEBAT $<$- c("BAT-USD", "ETH-USD")}\\
+\noindent \textit{portfolioPricesEBAT $<$- NULL}\\
+\noindent \textit{for (ticker in tickersEBAT)$\{$  portfolioPricesEBAT $<$- cbind(portfolioPricesEBAT, }\\
+\indent\textit{getSymbols.yahoo(ticker, from = starting$\_$date, to = final$\_$date, }\\
+\indent\textit{periodicity = "daily", auto.assign = F)[,6])$\}$}\\ \\
+
+\noindent \textit{portfolioPricesEBAT $<$- as.data.frame(portfolioPricesEBAT)}\\
+\noindent \textit{portfolioPricesEBAT $<$- rownames$\_$to$\_$column(portfolioPricesEBAT, var = "Date")}\\
+\noindent \textit{dfEBAT$\_$for$\_$plot $<$- portfolioPricesEBAT $\%>\%$ gather(key = "Ticker", }\\
+\indent\textit{value = "Price", -Date)}\\
+\noindent \textit{dfEBAT$\_$for$\_$plot $<$- na.omit(dfEBAT$\_$for$\_$plot)}\\ \\
+
+\noindent \textit{ggplot(dfEBAT$\_$for$\_$plot, aes(x = Date, y = Price))+}\\
+\indent \textit{geom$\_$line(aes(group = Ticker, linetype = Ticker))+}\\
+\indent \textit{theme(panel.background =  element$\_$blank(), }\\
+\indent \textit{panel.grid.major = element$\_$blank(), panel.grid.minor = element$\_$blank())+}\\
+\indent \textit{labs(title = "Price adjusted 2020")}\\
+
+\begin{figure}[h!]
+  \includegraphics[width=0.4\linewidth]{24.png}
+  \caption{Ethereum vs Basic Attention Token}
+  \label{fig:boat1}
+\end{figure}
+
+In principle, from Figure 13 we could conclude that our initial conjecture is true. In Figure 13 we can see huge variations on the value of Ethereum and no variations on the value of the Basic Attention Token. But Figure 13 was done with the data with no processing, therefore the high value of the Ethereum could be the reason why we see no changes on the value of the Basic Attention Token in the graphic and no correlation between the two currencies.
+
+To take away the noise made by the high value of Ethereum, we must normalize the value of both currencies before we plot both values in the same graphic.\\
+
+\noindent \textit{BATNorm $<$- na.omit(portfolioPricesEBAT)[2]/max(na.omit(portfolioPricesEBAT)[2])}\\
+\noindent \textit{ETHNorm $<$- na.omit(portfolioPricesEBAT)[3]/max(na.omit(portfolioPricesEBAT)[3])}\\
+\noindent \textit{NormEBAT = data.frame(BATNorm,ETHNorm)}\\
+
+\noindent \textit{NormEBAT $<$- rownames$\_$to$\_$column(NormEBAT, var = "Date")}\\
+\noindent \textit{dfEn$\_$for$\_$plot $<$- NormEBAT $\%>\%$ gather(key = "Ticker", value = "Price", -Date)}\\
+\noindent \textit{dfEn$\_$for$\_$plot $<$- na.omit(dfEn$\_$for$\_$plot)}\\
+
+\noindent \textit{ggplot(dfEn$\_$for$\_$plot, aes(x = Date, y = Price))+}\\
+\indent \textit{geom$\_$line(aes(group = Ticker, linetype = Ticker))+}\\
+\indent \textit{theme(panel.background =  element$\_$blank(),}\\
+\indent \textit{panel.grid.major = element$\_$blank(), panel.grid.minor = element$\_$blank())+}\\
+\indent \textit{labs(title = "Price normalized 2020")}
+
+\begin{figure}[h!]
+  \includegraphics[width=0.4\linewidth]{25.png}
+  \caption{Ethereum vs Basic Attention Token normalized}
+  \label{fig:boat1}
+\end{figure}
+
+After normalizing both values, we see in Figure 14 that both graphics overlap very rarely.
+
+Finally we plot in Figure 15 the value of the Basic Attention Token as a dependence variable of the value of Ethereum. With this, we will see that our conjecture was correct and there is not a strong correlation. It worth to mention that the date is not taken into account for this plot. Therefore, we do not see the evolution of the values but the possible relation between them.\\
+
+\noindent \textit{dataEBAT $<$- na.omit(portfolioPricesEBAT) ggplot(dataEBAT, aes(x = ETH.USD.Adjusted, y = BAT.USD.Adjusted)) + geom$\_$point()}
+
+\begin{figure}[h!]
+  \includegraphics[width=0.4\linewidth]{26.png}
+  \caption{Ethereum-Basic Attention Token relation}
+  \label{fig:boat1}
+\end{figure}
+
+\section{The correlation between Bitcoin vs Ethereum}
+In the previous section we explore the data of Bitcoin and Ethereum and found that their value might be related via a linear function. In this section we will explore more the conjecture that the value of these two assets are related linearly. The first step will be to test the correlation between the two variables.\\
+
+\noindent\textit{cor.test(dataEB[,3], dataEB[,2])}\\
+
+	 Pearson's product-moment correlation
+
+\noindent data:  dataEB[, 3] and dataEB[, 2]\\
+t = 52.925, df = 360, p-value $<$ 2.2e-16\\
+alternative hypothesis: true correlation is not equal to 0\\
+95 percent confidence interval:\\
+ 0.9283361 0.9520370\\
+sample estimates:\\
+      cor \\
+0.9413364\\
+
+As we can see that the p-value is very low. Therefore we should do a linear regression to build a model and test the model with new data, this in order to understand if the behavior exposed by Bitcoin and Ethereum during 2020 was a singularity of that time interval, or if the value of both assets are linearly related in general via the market cap and traders.
+
+\subsection{Building and testing the model}
+Even though we could build the model with all the data of 2020 and test it with the data of 2021, we will divide the data in a training set and test set for good practices and to not build a "perfect model" that is not good to make predictions.
+
+\noindent\textit{split = sample.split(dataEB$\$$ETH.USD.Adjusted, SplitRatio = 0.8)}\\
+\noindent\textit{training$\_$set = subset(dataEB, split == TRUE)}\\
+\noindent\textit{test$\_$set = subset(dataEB, split == FALSE)}\\
+
+\noindent\textit{regressor = lm(formula = ETH.USD.Adjusted $\sim$ BTC.USD.Adjusted, data = training$\_$set)}\\
+
+Now that we have build the model, we can plot the test set of 2020 (the points in red) against the prediction of our model (the blue line). We can also compare our model with our initial overview of the correlation.\\
+
+\noindent\textit{ggplot() +}\\
+\indent\textit{geom$\_$point(aes(x = test$\_$set$\$$BTC.USD.Adjusted, y = test$\_$set$\$$ETH.USD.Adjusted), colour = 'red') +}\\
+\indent\textit{geom$\_$line(aes(x = training$\_$set$\$$BTC.USD.Adjusted, y = predict(regressor, newdata = training$\_$set)), colour = 'blue') +}\\
+\indent\textit{xlab('BTC') + ylab('ETH')}\\
+
+\begin{figure}[h!]
+  \includegraphics[width=0.4\linewidth]{27.png}
+  \caption{Testing the model}
+  \label{fig:boat1}
+\end{figure}
+
+\subsection{Predicting new data (January 2021)}
+Now that we have build our model and seen that it fits with our initial conjecture, we can proceed to test the model with the data of January 2021. With this test we can conclude whether the correlation observed in 2020 trend to continue during 2021, or if the recent moves in the market has modify this relation. We will start by downloading the data and showing the Japanese Candlesticks before we apply our model, this should gives us an initial intuition about how well our model behaves with the new data\\
+
+\noindent\textit{starting$\_$prediction$\_$date $<$- "2021-1-1"}\\
+\noindent\textit{final$\_$prediction$\_$date $<$- "2021-1-31"}\\
+
+\noindent\textit{BTCUSD$\_$for$\_$prediction $<$- getSymbols.yahoo("BTC-USD", from = starting$\_$prediction$\_$date, to = final$\_$prediction$\_$date, auto.assign = F)[,]}\\
+\noindent\textit{BTCAdjust$\_$for$\_$prediction $<$- BTCUSD$\_$for$\_$prediction[,6]}\\
+\noindent\textit{chartSeries(BTCUSD$\_$for$\_$prediction)}\\
+
+\begin{figure}[h!]
+  \includegraphics[width=0.4\linewidth]{29.png}
+  \caption{Bitcoin January 2021}
+  \label{fig:boat1}
+\end{figure}
+
+\noindent\textit{ETHUSD$\_$for$\_$prediction $<$- getSymbols.yahoo("ETH-USD", from = starting$\_$prediction$\_$date, to = final$\_$prediction$\_$date, auto.assign = F)[,]}\\
+\noindent\textit{ETHAdjust$\_$for$\_$prediction $<$- ETHUSD$\_$for$\_$prediction[,6]}\\
+\noindent\textit{chartSeries(ETHUSD$\_$for$\_$prediction)}\\
+
+\begin{figure}[h!]
+  \includegraphics[width=0.4\linewidth]{30.png}
+  \caption{Ethereum January 2021}
+  \label{fig:boat1}
+\end{figure}
+
+From the two previous graphics we could conclude that the relation between both assets during 2021 will not follow the trend of 2020. We can observe that Bitcoin has lost a lot of value in the last two thirds of January, meanwhile Ethereum has had a constant growing trend during January. Even though it lost a lot of value during some days, Ethereum recovers the value very quick.
+
+Let us prepare the data and test our model with the new data, being the data point the red ones and the model prediction the blue line.\\
+
+\noindent \textit{EB$\_$for$\_$predictionB $<$- NULL}\\
+\noindent \textit{for (ticker in tickersEB)$\{$  EB$\_$for$\_$prediction $<$- cbind(EB$\_$for$\_$prediction, }\\
+\indent\textit{getSymbols.yahoo(ticker, from = starting$\_$date, to = final$\_$date, }\\
+\indent\textit{periodicity = "daily", auto.assign = F)[,6])$\}$}\\ \\
+
+\noindent \textit{ETH$\_$pred = data.frame(EB$\_$for$\_$prediction$\$$BTC.USD.Adjusted, predict(regressor, newdata = EB$\_$for$\_$prediction))}\\
+\noindent \textit{names(ETH$\_$pred)[2] $<$- "ETH.USD.Adjusted"}\\
+\noindent \textit{ETH$\_$pred$<$- ETH$\_$pred[, c(2,1)]}\\
+
+\noindent \textit{ggplot() +}\\
+\indent \textit{geom$\_$line(aes(x = ETH$\_$pred$\$$BTC.USD.Adjusted, y = ETH$\_$pred$\$$ETH.USD.Adjusted) , colour = 'blue') +}\\
+\indent \textit{geom$\_$point(aes(x = EB$\_$for$\_$prediction$\$$BTC.USD.Adjusted, y = EB$\_$for$\_$prediction$\$$ETH.USD.Adjusted) , colour = 'red') +}\\
+\indent \textit{xlab('BTC') + ylab('ETH')}
+
+\begin{figure}[h!]
+  \includegraphics[width=0.4\linewidth]{31.png}
+  \caption{Bitcoi-Ethereum January 2021}
+  \label{fig:boat1}
+\end{figure}
+
+As we can see in Figure 19, our model fails to predict the relation between this two assets observed during 2021.
+
+\subsection{The big picture}
+Before we make conclusion we have to get the big picture. We know that this is a small set of data and the error observed in this picture may be less than the error produced when the model was constructed with the 2020 data.\\
+
+\noindent \textit{EB$\_$whole $<$- NULL}\\
+\noindent \textit{for (ticker in tickersEB)$\{$  EB$\_$whole $<$- cbind(EB$\_$whole, }\\
+\indent\textit{getSymbols.yahoo(ticker, from = starting$\_$date, to = final$\_$date, }\\
+\indent\textit{periodicity = "daily", auto.assign = F)[,6])$\}$}\\ \\
+
+\noindent \textit{ETH$\_$pred$\_$whole = data.frame(EB$\_$whole$\$$BTC.USD.Adjusted, predict(regressor, newdata = EB$\_$whole))}\\
+\noindent \textit{names(ETH$\_$pred$\_$whole)[2] $<$- "ETH.USD.Adjusted"}\\
+\noindent \textit{ETH$\_$pred$\_$whole$<$- ETH$\_$pred$\_$whole[, c(2,1)]}\\
+
+\noindent \textit{ggplot() +}\\
+\indent \textit{geom$\_$line(aes(x = ETH$\_$pred$\_$whole$\$$BTC.USD.Adjusted, y = ETH$\_$pred$\_$whole$\$$ETH.USD.Adjusted) , colour = 'blue') +}\\
+\indent \textit{geom$\_$point(aes(x = EB$\_$whole$\$$BTC.USD.Adjusted, y = EB$\_$whole$\$$ETH.USD.Adjusted) , colour = 'red') +}\\
+\indent \textit{xlab('BTC') + ylab('ETH')}\\
+
+\begin{figure}[h!]
+  \includegraphics[width=0.4\linewidth]{32.png}
+  \caption{Bitcoin-Ethereum January 2020 - January 2021}
+  \label{fig:boat1}
+\end{figure}
+
+As we can observe in Figure 20, in which we used the data from 2020 and the one from January 2021, the linear relation that we observed during 2020 does not hold any longer with the new data.
+
+\subsection{The volume}
+Let us finish the section by taking a look to the volume of of Bitcoin and Ethereum. We have seen that during 2020 the value of both assets were related, now the question is whether the volume are also related.\\
+
+\noindent \textit{BTCVolume $<$- BTCUSD[,5]}\\
+\noindent \textit{chartSeries(BTCVolume)}\\
+
+\noindent \textit{ETHVolume $<$- ETHUSD[,5]}\\
+\noindent \textit{chartSeries(ETHVolume)}\\
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{33.png}
+    \caption{Bitcoin}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{34.png}
+    \caption{Ethereum}
+  \end{subfigure}
+  \caption{Volume}
+\end{figure}
+
+We can see in Figure 21 that the volumes look very similar
+
+\noindent \textit{EB$\_$Volume $<$- NULL}\\
+\noindent \textit{for (ticker in tickersEB)$\{$  EB$\_$Volume $<$- cbind(EB$\_$Volume, }\\
+\indent\textit{getSymbols.yahoo(ticker, from = starting$\_$date, to = final$\_$date, }\\
+\indent\textit{periodicity = "daily", auto.assign = F)[,6])$\}$}\\ \\
+
+\noindent \textit{EB$\_$Volume $<$- na.omit(EB$\_$Volume)}\\
+\noindent \textit{ggplot(EB$\_$Volume, aes(x = BTC.USD.Volume, y = ETH.USD.Volume)) + geom$\_$point(colour = 'red')}\\
+
+\begin{figure}[h!]
+  \includegraphics[width=0.4\linewidth]{35.png}
+  \caption{Bitcoin-Ethereum Volume}
+  \label{fig:boat1}
+\end{figure}
+
+From Figure 22 we can conclude that the volumes are related but the trend is not clearly linear as in the case of the values.
+
+\section{The correlation between Ethereum and the Basic Attention Token}
+As we saw in the third section, the value of Ethereum and the value of the Basic Attention Token have no correlation. In this section we will take a look to the volume of these two assets, this would give us an overview of the popularity of both assets.\\
+
+\noindent \textit{ETHVolume $<$- ETHUSD[,5]}\\
+\noindent \textit{chartSeries(ETHVolume)}\\
+
+\noindent \textit{BATVolume $<$- BATUSD[,5]}\\
+\noindent \textit{chartSeries(BATVolume)}\\
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{36.png}
+    \caption{Ethereum}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{37.png}
+    \caption{Basic Attention Token}
+  \end{subfigure}
+  \caption{Volume}
+\end{figure}
+
+From the previous images it is not clear if there is a correlation between these two volumes, in the first part of 2020 the volumes are clearly not correlated, but in the second part the volumes look similar. To get a better understanding we should plot the volume of the Basic Attention Token as a dependent variable of the volume of Ethereum.\\
+
+\noindent \textit{EBAT$\_$Volume $<$- NULL}\\
+\noindent \textit{for (ticker in tickersEBAT)$\{$  EBAT$\_$Volume $<$- cbind(EBAT$\_$Volume, }\\
+\indent\textit{getSymbols.yahoo(ticker, from = starting$\_$date, to = final$\_$date, }\\
+\indent\textit{periodicity = "daily", auto.assign = F)[,6])$\}$}\\ \\
+
+\noindent \textit{EBAT$\_$Volume $<$- na.omit(EBAT$\_$Volume)}\\
+\noindent \textit{ggplot(EBAT$\_$Volume, aes(x = ETH.USD.Volume, y = BAT.USD.Volume)) + geom$\_$point(colour = 'red')}\\
+
+\begin{figure}[h!]
+  \includegraphics[width=0.4\linewidth]{38.png}
+  \caption{Basic Attention Token}
+  \label{fig:boat1}
+\end{figure}
+
+From Figure 24 we can see that an increase in the volume of Ethereum does not implies an increase on the value of the Basic Attention Token, this makes us think that these two assets are not related in value and neither in volume.
+
+\section{Conclusions}
+After making this short study we can conclude that there is a relation between Bitcoin and Ethereum, but it looks that this relation is going to change during 2021. This could be due to many reasons and it deserves further studies. 
+
+In contrast of the simple idea that a token based on the Ethereum blockchain would have a tight relation to Ethereum, we have found that this is not necessarily true. We have show that the Basic Attention Token and Ethereum do not have a tight relation neither in value nor in volume. 
+
+Clearly these are not the only cryptoassets, there are many other such as Binance coin, Lite coin, etc. This short study can be made with any other cryptoassets to understand whether their are related via the market cap.
+
+Finally, there is not a general correlation between any two cryptoassets, we showed one case in which the assets are correlated and another case in which the assets are not.
+
+\end{document}
